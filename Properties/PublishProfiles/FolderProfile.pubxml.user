@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Lenovo\source\PublishedLibrary</_PublishTargetUrl>
+    <History>True|2025-11-24T18:43:41.0298916Z||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="SmartLibrary">
+      <Value>Host=localhost%3bPort=5432%3bDatabase=SmartLibrary%3bUsername=kanade%3bPassword=kanade</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
