@@ -11,9 +11,13 @@ namespace Smart_Library.SmartLibraryManagement.Models
 
         [MaxLength(255)]
         [Required]
-        public required string Name { get; set; }
+        public required string Username { get; set; }
 
-        [MaxLength(255)]
+		[MaxLength(255)]
+		[Required]
+		public required string Name { get; set; }
+
+		[MaxLength(255)]
         [Required]
         public required string Email { get; set; }
 

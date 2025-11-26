@@ -3,12 +3,13 @@ using Smart_Library.SmartLibraryManagement;
 using Smart_Library.SmartLibraryManagement.Models;
 using Smart_Library.SmartLibraryManagement.DTOs;
 using Microsoft.EntityFrameworkCore;
+using Smart_Library.SmartLibraryManagement.Service;
 
 namespace Smart_Library.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FacultyController : Controller
+    public class FacultyController : Controller, IBorrower
     {
         private readonly DatabaseLibrary db;
         public FacultyController(DatabaseLibrary db)
@@ -17,18 +18,53 @@ namespace Smart_Library.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetFaculties()
-        {
+		public IActionResult GetBorrower()
+		{
             var faculties = db.Faculties.ToList();
             return (!faculties.Any()) ? NotFound("No Faculties Registered") : Ok(faculties);
         }
 
-        [HttpGet]
-        [Route("{facultyId:int}")]
-        public IActionResult GetFaculty(int facultyId)
+		[HttpGet]
+		[Route("/GetAllBookIssue/")]
+		public IActionResult BookIssue()
+		{
+			List<BookIssueDto> borrowedbooks = new List<BookIssueDto>();
+			var get_loans = db.Loans.Where(loan => loan.TransactionStatus == "Borrowed").ToList();
+			if (!get_loans.Any() || get_loans.Count() == 0)
+				return NotFound("No Books Added");
+			foreach (var loan in get_loans)
+			{
+				if (loan.book_id is null) continue;
+				var get_loan = db.Loans.Find(loan.LoanId);
+				var get_user = db.Users.Find(loan.ClientId);
+				if (get_user!.Role != "Faculty") continue;
+				foreach (var book in loan.book_id)
+				{
+					var get_book = db.Books.Find(book);
+					if (get_book == null) continue;
+					var payload = new BookIssueDto
+					{
+						MemberId = get_user.UserId,
+						BookId = get_book.BookId,
+						LoanId = get_loan!.LoanId,
+						Name = get_user.Name,
+						Title = get_book.Title,
+						Author = get_book.Author,
+						BorrowDate = get_loan.BorrowDate,
+						DueDate = get_loan.DueDate,
+					};
+					borrowedbooks.Add(payload);
+				}
+			}
+			return Json(borrowedbooks);
+		}
+
+		[HttpGet]
+        [Route("{id:int}")]
+		public IActionResult GetBorrower(int id)
         {
-            var faculty = db.Faculties.Find(facultyId);
-            return (faculty == null) ? NotFound($"#404! Id {facultyId} Not Found") : Ok(faculty);
+            var faculty = db.Faculties.Find(id);
+            return (faculty == null) ? NotFound($"#404! Id {id} Not Found") : Ok(faculty);
         }
 
         [HttpPost]
@@ -61,13 +97,13 @@ namespace Smart_Library.Controllers
         }
 
         [HttpPut]
-        [Route("{facultyId:int}")]
-        public IActionResult UpdateFaculty(int facultyId, AddFacultyDTO updateFaculty)
+        [Route("{id:int}")]
+        public IActionResult UpdateFaculty(int id, AddFacultyDTO updateFaculty)
         {
             var get_user = db.Users.Find(updateFaculty.UserId);
             if (get_user == null) return NotFound($"#404!, Id {updateFaculty.UserId} Not Found");
-            var getFaculty = db.Faculties.Find(facultyId);
-            if (getFaculty == null) return NotFound($"#404, Id \"{facultyId}\" Not Found");
+            var getFaculty = db.Faculties.Find(id);
+            if (getFaculty == null) return NotFound($"#404, Id \"{id}\" Not Found");
 
             getFaculty.UserId = updateFaculty.UserId;
             getFaculty.Department = updateFaculty.Department;
@@ -76,20 +112,20 @@ namespace Smart_Library.Controllers
             db.Entry(getFaculty).State = EntityState.Modified;
             db.SaveChanges();
 
-            return Ok(db.Faculties.Find(facultyId));
+            return Ok(db.Faculties.Find(id));
         }
 
         [HttpDelete]
-        [Route("{facultyId:int}")]
-        public IActionResult DeleteFaculty(int facultyId)
+        [Route("{id:int}")]
+		public IActionResult DeleteBorrower(int id)
         {
-            var getFaculty = db.Faculties.Find(facultyId);
-            if (getFaculty == null) return NotFound($"#404!, Id {facultyId} Not Found");
+            var getFaculty = db.Faculties.Find(id);
+            if (getFaculty == null) return NotFound($"#404!, Id {id} Not Found");
 
             db.Faculties.Remove(getFaculty);
             db.SaveChanges();
 
-            return Ok($"Faculty With Id {facultyId} Deleted Successfully.");
+            return Ok($"Faculty With Id {id} Deleted Successfully.");
         }
     }
 }

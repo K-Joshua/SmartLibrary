@@ -44,20 +44,21 @@ namespace Smart_Library.Controllers
                         return NotFound($"Book Id {book_} Not Found");
                 }
             }
+            if (addLoan.book_id is null) return NotFound("Cannot Add Loan Without Book To Borrow");
             var loan = new Loan()
-            {
-                ClientId = addLoan.ClientId,
-                TransactionType = addLoan.TransactionType,
-                ReservedDate = addLoan.ReservedDate,
-                BorrowDate = addLoan.BorrowDate,
-                DueDate = addLoan.DueDate,
-                ReturnDate = addLoan.ReturnDate,
-                book_id = addLoan.book_id,
-                TransactionStatus = addLoan.TransactionStatus,
-                FineId = addLoan.FineId,
-                CreatedBy = addLoan.CreatedBy,
-                CreatedAt = addLoan.CreatedAt
-            };
+                {
+                    ClientId = addLoan.ClientId,
+                    TransactionType = addLoan.TransactionType,
+                    ReservedDate = addLoan.ReservedDate,
+                    BorrowDate = addLoan.BorrowDate,
+                    DueDate = addLoan.DueDate,
+                    ReturnDate = addLoan.ReturnDate,
+                    book_id = addLoan.book_id,
+                    TransactionStatus = addLoan.TransactionStatus,
+                    FineId = addLoan.FineId,
+                    CreatedBy = addLoan.CreatedBy,
+                    CreatedAt = addLoan.CreatedAt
+                };
 
             db.Loans.Add(loan);
             db.SaveChanges();
@@ -102,23 +103,15 @@ namespace Smart_Library.Controllers
             return Ok(borrowedbooks);
         }
 
-        //[HttpPut]
-        //[Route("/ClearBorrowedBooks/{loanId:int}")]
-        //public IActionResult ClearBorrowedBooks(UpdateBooksBorrowedInLoan borrowedbooks, int loanId)
-        //{
-
-            //float fine;
-            //var get_loan = db.Loans.Find(loanId);
-            //if (get_loan == null) return NotFound("Loan Cannot Be Found");
-            //var get_user = db.Users.Find(get_loan.ClientId);
-            //if (get_user!.Role == "Student") fine = 2;
-            //else;
-            //if (get_loan.DueDate <= DateOnly.FromDateTime(DateTime.Now))
-            //{
-
-            //}
-            //return Ok(borrowedbooks);
-        //}
+        [HttpPut]
+        [Route("/ClearBorrowedBooks/{loanId:int}")]
+        public IActionResult ClearBorrowedBooks(int loanId)
+        {
+            var get_loan = db.Loans.Find(loanId);
+            if (get_loan == null) return NotFound("Loan Cannot Be Found");
+            get_loan.book_id = [];
+            return Ok("Book Id Has Been Cleared");
+        }
 
         [HttpPut]
         [Route("{loanId:int}")]

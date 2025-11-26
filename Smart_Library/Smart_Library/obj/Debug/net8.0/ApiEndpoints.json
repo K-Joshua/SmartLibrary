@@ -19,7 +19,7 @@
     "Parameters": [
       {
         "Name": "addBook",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddBookDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddBookDTO",
         "IsRequired": true
       }
     ],
@@ -56,7 +56,7 @@
       },
       {
         "Name": "updateBook",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddBookDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddBookDTO",
         "IsRequired": true
       }
     ],
@@ -73,6 +73,27 @@
       {
         "Name": "bookId",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.BookController",
+    "Method": "updateIsBookBorrowed",
+    "RelativePath": "api/Book/BorrowBookUpdate/{bookId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "databorrowed",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.UpdateBookBorrowed",
         "IsRequired": true
       }
     ],
@@ -98,7 +119,7 @@
     "Parameters": [
       {
         "Name": "addFaculty",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddFacultyDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddFacultyDTO",
         "IsRequired": true
       }
     ],
@@ -135,7 +156,7 @@
       },
       {
         "Name": "updateFaculty",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddFacultyDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddFacultyDTO",
         "IsRequired": true
       }
     ],
@@ -177,7 +198,7 @@
     "Parameters": [
       {
         "Name": "addFine",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddFineDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddFineDTO",
         "IsRequired": true
       }
     ],
@@ -214,7 +235,7 @@
       },
       {
         "Name": "updateFine",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddFineDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddFineDTO",
         "IsRequired": true
       }
     ],
@@ -256,7 +277,7 @@
     "Parameters": [
       {
         "Name": "addLoan",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddLoanDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddLoanDTO",
         "IsRequired": true
       }
     ],
@@ -293,7 +314,7 @@
       },
       {
         "Name": "updateLoan",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddLoanDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddLoanDTO",
         "IsRequired": true
       }
     ],
@@ -435,7 +456,7 @@
       },
       {
         "Name": "updateUser",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddUserDTOs",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddUserDTOs",
         "IsRequired": true
       }
     ],
@@ -458,6 +479,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Smart_Library.Controllers.LoanController",
+    "Method": "ClearBorrowedBooks",
+    "RelativePath": "ClearBorrowedBooks/{loanId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loanId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.BookController",
+    "Method": "GetAllBorrowedBook",
+    "RelativePath": "GetAllBorrowed",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Smart_Library.Controllers.UserController",
     "Method": "Login",
     "RelativePath": "LogIn",
@@ -467,7 +514,7 @@
     "Parameters": [
       {
         "Name": "logindto",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.LoginDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.LoginDTO",
         "IsRequired": true
       }
     ],
@@ -483,7 +530,28 @@
     "Parameters": [
       {
         "Name": "addUser",
-        "Type": "Smart_Library.SmartLiibraryManagement.DTOs.AddUserDTOs",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddUserDTOs",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.LoanController",
+    "Method": "UpdateBorrowedBooks",
+    "RelativePath": "UpdateBorrowedBooks/{loanId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "borrowedbooks",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.UpdateBooksBorrowedInLoan",
+        "IsRequired": true
+      },
+      {
+        "Name": "loanId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

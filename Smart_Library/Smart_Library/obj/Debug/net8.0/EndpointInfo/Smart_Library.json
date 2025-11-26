@@ -46,6 +46,18 @@
         }
       }
     },
+    "/GetAllBorrowed": {
+      "get": {
+        "tags": [
+          "Book"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Book/{bookId}": {
       "get": {
         "tags": [
@@ -123,6 +135,48 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Book/BorrowBookUpdate/{bookId}": {
+      "put": {
+        "tags": [
+          "Book"
+        ],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookBorrowed"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookBorrowed"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookBorrowed"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -505,6 +559,71 @@
         }
       }
     },
+    "/UpdateBorrowedBooks/{loanId}": {
+      "put": {
+        "tags": [
+          "Loan"
+        ],
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBooksBorrowedInLoan"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBooksBorrowedInLoan"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBooksBorrowedInLoan"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ClearBorrowedBooks/{loanId}": {
+      "put": {
+        "tags": [
+          "Loan"
+        ],
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Student": {
       "get": {
         "tags": [
@@ -838,10 +957,7 @@
           "createdAt",
           "createdBy",
           "isbn",
-          "numberOfAvailableCopies",
-          "numberOfCopies",
           "publisher",
-          "rentCost",
           "title",
           "yearPublish"
         ],
@@ -875,18 +991,6 @@
             "type": "string",
             "nullable": true
           },
-          "rentCost": {
-            "type": "number",
-            "format": "double"
-          },
-          "numberOfCopies": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "numberOfAvailableCopies": {
-            "type": "integer",
-            "format": "int32"
-          },
           "createdBy": {
             "type": "string",
             "nullable": true
@@ -902,7 +1006,7 @@
         "required": [
           "department",
           "gradeLevel",
-          "positionLevel",
+          "position",
           "userId"
         ],
         "type": "object",
@@ -919,9 +1023,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "positionLevel": {
-            "type": "integer",
-            "format": "int32"
+          "position": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -964,6 +1068,7 @@
       },
       "AddLoanDTO": {
         "required": [
+          "book_id",
           "borrowDate",
           "clientId",
           "createdAt",
@@ -1000,6 +1105,14 @@
           "returnDate": {
             "type": "string",
             "format": "date"
+          },
+          "book_id": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
           },
           "transactionStatus": {
             "type": "string",
@@ -1093,6 +1206,30 @@
           },
           "password": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateBookBorrowed": {
+        "type": "object",
+        "properties": {
+          "isBorrowed": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateBooksBorrowedInLoan": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           }
         },

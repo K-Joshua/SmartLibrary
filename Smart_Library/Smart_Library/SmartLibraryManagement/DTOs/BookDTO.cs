@@ -47,4 +47,16 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
         public string? UpdatedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
+
+    public class BookIssueDto
+    {
+        public int MemberId { get; set; }
+        public int BookId { get; set; }
+        public int LoanId { get; set; }
+        public string? Name { get; set; }
+        public string? Title { get; set; }
+        public string? Author { get; set; }
+		public required DateOnly BorrowDate { get; set; }
+		public required DateOnly DueDate { get; set; }
+	}
 }

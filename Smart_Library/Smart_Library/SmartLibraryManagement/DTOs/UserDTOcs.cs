@@ -5,7 +5,8 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
 {
     public class AddUserDTOs
     {
-        public required string Name { get; set; }
+		public required string Name { get; set; }
+        public required string Username { get; set; }
 
         public required string Email { get; set; }
 
@@ -18,15 +19,15 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
 
     public class UpdateUserDTOs
     {
-        public required string Name { get; set; }
-        public DateOnly? Birthday { get; set; }
+        public required string Username {get; set; }
     }
 
     public class GetUserDTO
     {
+		public required string Name { get; set; }
         public required int UserId { get; set; }
 
-        public required string Name { get; set; }
+        public required string Username { get; set; }
 
         public required string Email { get; set; }
 

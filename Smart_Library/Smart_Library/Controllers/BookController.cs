@@ -17,8 +17,6 @@ namespace Smart_Library.Controllers
             this.db = db;
         }
 
-
-
         [HttpGet]
         public IActionResult GetBooks()
         {
@@ -31,8 +29,8 @@ namespace Smart_Library.Controllers
         public IActionResult GetAllBorrowedBook()
         {
             List <GetBooksAndRequest> borrowedbooks = new List<GetBooksAndRequest>();
-            var get_loans = db.Loans.ToList();
-            if (!get_loans.Any() || get_loans.Count() == 0)
+			var get_loans = db.Loans.Where( loan => loan.TransactionStatus == "Borrowed").ToList();
+			if (!get_loans.Any() || get_loans.Count() == 0)
                 return NotFound("No Books Added");
 
             foreach (var loan in get_loans)
@@ -52,7 +50,7 @@ namespace Smart_Library.Controllers
                         YearPublish=get_book.YearPublish,
                         BorrowDate=get_loan!.BorrowDate,
                         DueDate=get_loan!.DueDate,
-                        Username=get_user!.Name,
+                        Username=get_user!.Username,
                         Role=get_user!.Role,
                     };
                     borrowedbooks.Append(payload);
@@ -60,9 +58,45 @@ namespace Smart_Library.Controllers
             }
             return Json(borrowedbooks);
         }
-    
 
-        [HttpGet]
+
+
+		[HttpGet]
+		[Route("/GetAllBorrowed/History")]
+		public IActionResult GetAllBorrowedHistory()
+		{
+			List<GetBooksAndRequest> borrowedbooks = new List<GetBooksAndRequest>();
+			var get_loans = db.Loans.Where( loan => loan.TransactionStatus == "Finished").ToList();
+			if (!get_loans.Any() || get_loans.Count() == 0)
+				return NotFound("No Books Added");
+
+			foreach (var loan in get_loans)
+			{
+				if (loan.book_id is null) continue;
+				var get_loan = db.Loans.Find(loan.LoanId);
+				foreach (var book in loan.book_id)
+				{
+					var get_book = db.Books.Find(book);
+					if (get_book == null) continue;
+					var get_user = db.Users.Find(loan.ClientId);
+					var payload = new GetBooksAndRequest
+					{
+						book_id=get_book.BookId,
+						Title=get_book.Title,
+						Publisher=get_book.Publisher,
+						YearPublish=get_book.YearPublish,
+						BorrowDate=get_loan!.BorrowDate,
+						DueDate=get_loan!.DueDate,
+						Username=get_user!.Username,
+						Role=get_user!.Role,
+					};
+					borrowedbooks.Append(payload);
+				}
+			}
+			return Json(borrowedbooks);
+		}
+
+		[HttpGet]
         [Route("{bookId:int}")]
         public IActionResult GetBook(int bookId)
         {

@@ -2,7 +2,7 @@
 {
     public class GenericAddValue
     {
-        public int NumberOfBooksBorrowed {get; set;}
+        public int Id {get; set;}
 
     }
 }

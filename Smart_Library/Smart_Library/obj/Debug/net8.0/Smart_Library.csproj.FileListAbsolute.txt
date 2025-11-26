@@ -288,3 +288,4 @@ C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Libra
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.pdb
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.genruntimeconfig.cache
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\ref\Smart_Library.dll
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.sourcelink.json
