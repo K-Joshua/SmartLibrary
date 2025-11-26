@@ -32,8 +32,7 @@ namespace Smart_Library.SmartLibraryManagement.Models
         public required string Category { get; set; }
 
         [MaxLength(255)]
-        [Required]
-        public required string Status { get; set; }
+        public bool? isBorrowed { get; set; } = false;
 
         [MaxLength(255)]
         [Required]
@@ -48,5 +47,6 @@ namespace Smart_Library.SmartLibraryManagement.Models
         public string? UpdatedBy { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
-    }
+
+	}
 }
