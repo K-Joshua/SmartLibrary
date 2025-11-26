@@ -58,6 +58,18 @@
         }
       }
     },
+    "/GetAllBorrowed/History": {
+      "get": {
+        "tags": [
+          "Book"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Book/{bookId}": {
       "get": {
         "tags": [
@@ -225,14 +237,26 @@
         }
       }
     },
-    "/api/Faculty/{facultyId}": {
+    "/GetAllBookIssue": {
+      "get": {
+        "tags": [
+          "Faculty"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Faculty/{id}": {
       "get": {
         "tags": [
           "Faculty"
         ],
         "parameters": [
           {
-            "name": "facultyId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -253,7 +277,7 @@
         ],
         "parameters": [
           {
-            "name": "facultyId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -266,17 +290,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddFacultyDTO"
+                "$ref": "#/components/schemas/UpdateFacultyDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddFacultyDTO"
+                "$ref": "#/components/schemas/UpdateFacultyDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddFacultyDTO"
+                "$ref": "#/components/schemas/UpdateFacultyDTO"
               }
             }
           }
@@ -293,7 +317,7 @@
         ],
         "parameters": [
           {
-            "name": "facultyId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -559,6 +583,48 @@
         }
       }
     },
+    "/AddFine/{loanId}": {
+      "put": {
+        "tags": [
+          "Loan"
+        ],
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFineByLibrarian"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFineByLibrarian"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFineByLibrarian"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/UpdateBorrowedBooks/{loanId}": {
       "put": {
         "tags": [
@@ -665,14 +731,26 @@
         }
       }
     },
-    "/api/Student/{studentId}": {
+    "/GetAllBookIssue/Student": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Student/{id}": {
       "get": {
         "tags": [
           "Student"
         ],
         "parameters": [
           {
-            "name": "studentId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -693,7 +771,7 @@
         ],
         "parameters": [
           {
-            "name": "studentId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -733,7 +811,7 @@
         ],
         "parameters": [
           {
-            "name": "studentId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -753,6 +831,28 @@
       "get": {
         "tags": [
           "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/GetUsername": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -802,17 +902,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddUserDTOs"
+                "$ref": "#/components/schemas/UpdateUserDTOs"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddUserDTOs"
+                "$ref": "#/components/schemas/UpdateUserDTOs"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddUserDTOs"
+                "$ref": "#/components/schemas/UpdateUserDTOs"
               }
             }
           }
@@ -906,45 +1006,6 @@
           }
         }
       }
-    },
-    "/WeatherForecast": {
-      "get": {
-        "tags": [
-          "WeatherForecast"
-        ],
-        "operationId": "GetWeatherForecast",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -1005,7 +1066,6 @@
       "AddFacultyDTO": {
         "required": [
           "department",
-          "gradeLevel",
           "position",
           "userId"
         ],
@@ -1019,12 +1079,33 @@
             "type": "string",
             "nullable": true
           },
-          "gradeLevel": {
-            "type": "integer",
-            "format": "int32"
-          },
           "position": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddFineByLibrarian": {
+        "type": "object",
+        "properties": {
+          "returnDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "fineId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -1074,9 +1155,6 @@
           "createdAt",
           "createdBy",
           "dueDate",
-          "fineId",
-          "reservedDate",
-          "returnDate",
           "transactionStatus",
           "transactionType"
         ],
@@ -1092,7 +1170,8 @@
           },
           "reservedDate": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "nullable": true
           },
           "borrowDate": {
             "type": "string",
@@ -1104,7 +1183,8 @@
           },
           "returnDate": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "nullable": true
           },
           "book_id": {
             "type": "array",
@@ -1120,7 +1200,8 @@
           },
           "fineId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "createdBy": {
             "type": "string",
@@ -1162,11 +1243,16 @@
           "isActive",
           "name",
           "password",
-          "role"
+          "role",
+          "username"
         ],
         "type": "object",
         "properties": {
           "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
             "type": "string",
             "nullable": true
           },
@@ -1180,11 +1266,6 @@
           },
           "isActive": {
             "type": "boolean"
-          },
-          "birthday": {
-            "type": "string",
-            "format": "date",
-            "nullable": true
           },
           "role": {
             "type": "string",
@@ -1235,23 +1316,31 @@
         },
         "additionalProperties": false
       },
-      "WeatherForecast": {
+      "UpdateFacultyDTO": {
+        "required": [
+          "department",
+          "position"
+        ],
         "type": "object",
         "properties": {
-          "date": {
+          "department": {
             "type": "string",
-            "format": "date"
+            "nullable": true
           },
-          "temperatureC": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "temperatureF": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "summary": {
+          "position": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateUserDTOs": {
+        "required": [
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
             "type": "string",
             "nullable": true
           }

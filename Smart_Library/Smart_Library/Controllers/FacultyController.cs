@@ -77,7 +77,6 @@ namespace Smart_Library.Controllers
             {
                 UserId = addFaculty.UserId,
                 Department = addFaculty.Department,
-                GradeLevel = addFaculty.GradeLevel,
                 Position=addFaculty.Position,
             };
 
@@ -89,7 +88,6 @@ namespace Smart_Library.Controllers
                 FacultytId = faculty.FacultytId,
                 UserId = faculty.UserId,
                 Department = faculty.Department,
-                GradeLevel = faculty.GradeLevel,
                 Position = faculty.Position,
             };
 
@@ -98,16 +96,15 @@ namespace Smart_Library.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
-        public IActionResult UpdateFaculty(int id, AddFacultyDTO updateFaculty)
+        public IActionResult UpdateFaculty(int id, UpdateFacultyDTO updateFaculty)
         {
-            var get_user = db.Users.Find(updateFaculty.UserId);
-            if (get_user == null) return NotFound($"#404!, Id {updateFaculty.UserId} Not Found");
             var getFaculty = db.Faculties.Find(id);
             if (getFaculty == null) return NotFound($"#404, Id \"{id}\" Not Found");
 
-            getFaculty.UserId = updateFaculty.UserId;
+            var get_user = db.Users.Find(getFaculty.UserId);
+            if (get_user == null) return NotFound($"#404!, Id {getFaculty.UserId} Not Found");
+
             getFaculty.Department = updateFaculty.Department;
-            getFaculty.GradeLevel = updateFaculty.GradeLevel;
             getFaculty.Position = updateFaculty.Position;
             db.Entry(getFaculty).State = EntityState.Modified;
             db.SaveChanges();

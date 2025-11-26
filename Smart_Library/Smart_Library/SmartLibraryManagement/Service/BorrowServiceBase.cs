@@ -2,20 +2,12 @@
 {
     public class BorrowServiceBase
     {
-        private Dictionary<string, float> finecost = new Dictionary<string, float>()
+        public virtual Dictionary<string, float> finecost { get; } = new Dictionary<string, float>()
         {
-            {"Student Teacher", 5},
-            {"Teacher", 10},
-            {"Instructor", 10},
-            {"Senior Teacher", 15},
-            {"Lecturer", 10},
-            {"Head of Department", 20},
-            {"HOD", 20},
-            {"Dean", 25},
-            {"Vice Dean", 30},
-            {"Associate Dean", 30},
-            {"Director", 35},
-            {"Principal", 40}
+        };
+
+        public virtual Dictionary<string, int> daytime { get; } = new Dictionary<string, int>()
+        {
         };
         public float GetFineCost(string position)
         {
@@ -27,9 +19,16 @@
 
         public virtual float GetTotalFine(int numberOfData, string position)
         {
-            float finecost = GetFineCost(position);
-            float totalCost = (float)numberOfData * finecost;
+            float fine = GetFineCost(position);
+            float totalCost = (float)numberOfData * fine;
             return totalCost;
+        }
+        public virtual int GetDayDueDateByPosition(string position)
+        {
+            if (daytime.TryGetValue(position, out int day))
+                return day;
+
+            return 4; // or any default value, might be a student teacher so 4
         }
     }
 }

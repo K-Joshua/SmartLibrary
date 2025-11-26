@@ -26,7 +26,6 @@ namespace Smart_Library.SmartLibraryManagement.Models
 
         [Required]
         public required bool isActive { get; set; }
-        public DateOnly? Birthday { get; set; }
         [Required]
         public required string Role { get; set; }
     }

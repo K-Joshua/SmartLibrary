@@ -21,12 +21,27 @@ namespace Smart_Library.Controllers
         public IActionResult GetUsers()
         {
             var users = db.Users.ToList();
-            return (!users.Any() || users.Count() == 0) ? NotFound("No User Registered"): Ok(users);
+            if (!users.Any() || users.Count() == 0) return NotFound("No User Registered");
+            List<GetUserDTO> payloadList = new List<GetUserDTO>();
+            foreach(var user in users)
+            {
+                var payload = new GetUserDTO()
+                {
+                    Name=user.Name,
+                    UserId=user.UserId,
+                    Username=user.Username,
+                    Email=user.Email,
+                    isActive=user.isActive,
+                    Role=user.Role
+                };
+                payloadList.Add(payload);
+            }
+            return Ok(payloadList);
         }
 
 		[HttpGet]
-		[Route("/GetUserName")]
-		public IActionResult GetName(int id)
+		[Route("/GetUsername")]
+		public IActionResult Getname(int id)
 		{
 			var user = db.Users.Find(id);
 			return (user is null) ? NotFound("No Students Registered") : Ok(user.Name);
@@ -38,7 +53,17 @@ namespace Smart_Library.Controllers
         public IActionResult GetUser(int userId)
         {
             var user = db.Users.Find(userId);
-            return (user == null) ? NotFound($"#404! ,Id {userId} Not Found") : Ok(user);
+            if (user is null) return NotFound($"#404! ,Id {userId} Not Found");
+            var payload = new GetUserDTO()
+            {
+                Name=user.Name,
+                UserId=user.UserId,
+                Username=user.Username,
+                Email=user.Email,
+                isActive=user.isActive,
+                Role=user.Role
+            };
+            return Ok(payload);
         }
 
 		[HttpPost]
@@ -54,7 +79,6 @@ namespace Smart_Library.Controllers
                 Email = addUser.Email,
                 PasswordHash = pass_hash,
                 isActive = true,
-                Birthday = addUser.Birthday,
                 Role = role,
             };
             db.Users.Add(user);
@@ -66,7 +90,6 @@ namespace Smart_Library.Controllers
 				Username = addUser.Username,
                 Email = addUser.Email,
                 isActive = addUser.isActive,
-                Birthday = addUser.Birthday,
                 Role = role,
             };
             return Ok(showresult);
@@ -76,20 +99,19 @@ namespace Smart_Library.Controllers
         [Route("/LogIn")]
         public IActionResult Login(LoginDTO logindto)
         {
-            var get_user = db.Users.Where(e => e.Email  == logindto.Email).FirstOrDefault();
-            if (get_user == null) return Unauthorized("Invalid Credentials! Username Incorrect");
+            var get_user = db.Users.Where(e => e.Email  == logindto.Email || e.Username == logindto.Email).FirstOrDefault();
+            if (get_user == null) return Unauthorized("Invalid Credentials! Email Incorrect");
             if (BCrypt.Net.BCrypt.Verify(logindto.Password, get_user.PasswordHash) == false) return Unauthorized("Invalid Credentials! Password Incorrect");
             return Ok($"Login Successful, Welcome Back {get_user.Username}");
         }
 
         [HttpPut]
         [Route("{userId:int}")]
-        public IActionResult UpdateUser(int userId, AddUserDTOs updateUser)
+        public IActionResult UpdateUser(int userId, UpdateUserDTOs updateUser)
         {
             var get_user = db.Users.Find(userId);
             if (get_user == null) return NotFound($"#404, Id \"{userId}\" Not Found");
             get_user.Username = updateUser.Username;
-            get_user.Birthday = updateUser.Birthday;
             db.Entry(get_user).State = EntityState.Modified;
             db.SaveChanges();
             var show_result = db.Users.Find(userId);

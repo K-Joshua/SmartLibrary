@@ -19,10 +19,6 @@ namespace Smart_Library.SmartLibraryManagement
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>()
-                .HasIndex(User => User.Email)
-                .IsUnique();
-
             modelBuilder.Entity<Loan>()
                 .Property(Loan => Loan.CreatedAt)
                 .HasDefaultValueSql("NOW()");

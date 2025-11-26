@@ -134,10 +134,10 @@ namespace Smart_Library.Controllers
                 YearPublish = book.YearPublish,
                 Category = book.Category,
                 Condition = book.Condition,
-                CreatedBy = book.CreatedBy,
-                CreatedAt = book.CreatedAt,
-                UpdatedBy = book.UpdatedBy,
-                UpdatedAt = book.UpdatedAt
+                CreatedBy = "Librarian",
+                CreatedAt = DateTime.UtcNow,
+                UpdatedBy = "Librarian",
+                UpdatedAt = DateTime.UtcNow
             };
 
             return Ok(showResult);
@@ -171,8 +171,8 @@ namespace Smart_Library.Controllers
             getBook.YearPublish = updateBook.YearPublish;
             getBook.Category = updateBook.Category;
             getBook.Condition = updateBook.Condition;
-            getBook.CreatedBy = updateBook.CreatedBy;
-            getBook.CreatedAt = updateBook.CreatedAt;
+            getBook.UpdatedBy = updateBook.CreatedBy;
+            getBook.UpdatedAt = updateBook.CreatedAt;
 
             db.Entry(getBook).State = EntityState.Modified;
             db.SaveChanges();

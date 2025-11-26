@@ -13,8 +13,8 @@ using Smart_Library.SmartLibraryManagement;
 namespace Smart_Library.Migrations
 {
     [DbContext(typeof(DatabaseLibrary))]
-    [Migration("20251125130350_HeavyChangesOnModels")]
-    partial class HeavyChangesOnModels
+    [Migration("20251126130250_RemovedUniqueInEmail")]
+    partial class RemovedUniqueInEmail
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,15 +259,12 @@ namespace Smart_Library.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
-                    b.Property<DateOnly?>("Birthday")
-                        .HasColumnType("date");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
@@ -280,13 +277,15 @@ namespace Smart_Library.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
                     b.Property<bool>("isActive")
                         .HasColumnType("boolean");
 
                     b.HasKey("UserId");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.ToTable("Users");
                 });

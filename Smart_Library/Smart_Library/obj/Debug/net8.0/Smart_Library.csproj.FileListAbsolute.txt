@@ -1,3 +1,12 @@
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.csproj.AssemblyReference.cache
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.AssemblyInfoInputs.cache
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.AssemblyInfo.cs
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.sourcelink.json
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\appsettings.json
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\Smart_Library.staticwebassets.endpoints.json
@@ -101,6 +110,10 @@ C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Libra
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\System.Text.Encodings.Web.dll
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\System.Text.Json.dll
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\System.Windows.Extensions.dll
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\xunit.abstractions.dll
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\xunit.assert.dll
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\xunit.core.dll
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\xunit.execution.dotnet.dll
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\af\Humanizer.resources.dll
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\ar\Humanizer.resources.dll
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\az\Humanizer.resources.dll
@@ -265,14 +278,6 @@ C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Libra
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.csproj.AssemblyReference.cache
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\rpswa.dswa.cache.json
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.AssemblyInfoInputs.cache
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.AssemblyInfo.cs
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.csproj.CoreCompileInputs.cache
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -288,4 +293,3 @@ C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Libra
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.pdb
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.genruntimeconfig.cache
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\ref\Smart_Library.dll
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.sourcelink.json

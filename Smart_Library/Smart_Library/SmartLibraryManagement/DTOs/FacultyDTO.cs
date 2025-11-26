@@ -7,7 +7,12 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
     {
         public required int UserId { get; set; }
         public required string Department { get; set; }
-        public required int GradeLevel { get; set; }
+        public required string Position { get; set; }
+    }
+
+    public class UpdateFacultyDTO
+    {
+        public required string Department { get; set; }
         public required string Position { get; set; }
     }
 
@@ -16,8 +21,6 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
         public required int FacultytId { get; set; }
         public required int UserId { get; set; }
         public required string Department { get; set; }
-        public required int GradeLevel { get; set; }
-        public float? FineCost { get; set; } = 0;
         public required string Position { get; set; }
     }
 }

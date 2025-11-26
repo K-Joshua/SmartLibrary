@@ -35,35 +35,50 @@ namespace Smart_Library.Controllers
         [HttpPost]
         public IActionResult AddLoan(AddLoanDTO addLoan)
         {
-            if (addLoan.book_id is not null)
+            if (addLoan.book_id == null || !addLoan.book_id.Any())
+                return NotFound("Cannot Add Loan Without Book To Borrow");
+
+            var booksToBorrow = new List<Book>();
+            foreach (var bookId in addLoan.book_id)
             {
-                foreach (var book_ in addLoan.book_id)
-                {
-                    var check_books = db.Books.Find(book_);
-                    if (check_books == null)
-                        return NotFound($"Book Id {book_} Not Found");
-                }
+                var book = db.Books.Find(bookId);
+                if (book == null)
+                    return NotFound($"Book Id {bookId} Not Found");
+
+                book.isBorrowed = true;
+                booksToBorrow.Add(book);
             }
-            if (addLoan.book_id is null) return NotFound("Cannot Add Loan Without Book To Borrow");
+
+            foreach (var book in booksToBorrow)
+                db.Entry(book).State = EntityState.Modified;
+
+            var user = db.Users.Find(addLoan.ClientId);
+            if (user == null) return NotFound("No User Found");
+
+            var faculty = db.Faculties.FirstOrDefault(f => f.UserId == user.UserId);
+            if (faculty == null) return NotFound("Faculty Record Not Found");
+
+            int get_day = ValidationService.GetDayDueDate(user.Role, faculty.Position);
+            DateOnly dueDate = addLoan.DueDate.AddDays(get_day);
+
             var loan = new Loan()
-                {
-                    ClientId = addLoan.ClientId,
-                    TransactionType = addLoan.TransactionType,
-                    ReservedDate = addLoan.ReservedDate,
-                    BorrowDate = addLoan.BorrowDate,
-                    DueDate = addLoan.DueDate,
-                    ReturnDate = addLoan.ReturnDate,
-                    book_id = addLoan.book_id,
-                    TransactionStatus = addLoan.TransactionStatus,
-                    FineId = addLoan.FineId,
-                    CreatedBy = addLoan.CreatedBy,
-                    CreatedAt = addLoan.CreatedAt
-                };
+            {
+                ClientId = addLoan.ClientId,
+                TransactionType = addLoan.TransactionType ?? "Borrowed",
+                ReservedDate = addLoan.ReservedDate,
+                BorrowDate = addLoan.BorrowDate,
+                DueDate = dueDate,
+                ReturnDate = null,
+                book_id = addLoan.book_id,
+                TransactionStatus = addLoan.TransactionStatus,
+                FineId = addLoan.FineId,
+                CreatedBy = "Librarian",
+                CreatedAt = DateTime.UtcNow,
+            };
 
             db.Loans.Add(loan);
-            db.SaveChanges();
-
-            var showResult = new GetLoanDTO()
+            db.SaveChanges(); 
+            var result = new GetLoanDTO()
             {
                 LoanId = loan.LoanId,
                 ClientId = loan.ClientId,
@@ -81,8 +96,29 @@ namespace Smart_Library.Controllers
                 UpdatedAt = loan.UpdatedAt
             };
 
-            return Ok(showResult);
+            return Ok(result);
         }
+
+
+        [HttpPut]
+        [Route("/AddFine/{loanId:int}")]
+        public IActionResult UpdateBorrowedBooks(AddFineByLibrarian addfine, int loanId)
+        {
+            var get_loan = db.Loans.Find(loanId);
+            if (get_loan == null)
+                return NotFound("No Loan Found");
+            get_loan.ReturnDate = addfine.ReturnDate;
+            get_loan.FineId = addfine.FineId;
+            get_loan.UpdatedAt = DateTime.UtcNow;
+            get_loan.UpdatedBy = "Librarian";
+            db.Entry(get_loan).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok(get_loan);
+        }
+        public DateOnly? ReturnDate { get; set; }
+        public int? FineId { get; set; }
+        public string? UpdatedBy { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [HttpPut]
         [Route("/UpdateBorrowedBooks/{loanId:int}")]
@@ -100,6 +136,9 @@ namespace Smart_Library.Controllers
                         return NotFound($"Book Id {book_} Not Found");
                 }
             }
+            get_loan.book_id = borrowedbooks.book_id;
+            db.Entry(get_loan).State = EntityState.Modified;
+            db.SaveChanges();
             return Ok(borrowedbooks);
         }
 
@@ -110,6 +149,8 @@ namespace Smart_Library.Controllers
             var get_loan = db.Loans.Find(loanId);
             if (get_loan == null) return NotFound("Loan Cannot Be Found");
             get_loan.book_id = [];
+            db.Entry(get_loan).State = EntityState.Modified;
+            db.SaveChanges();
             return Ok("Book Id Has Been Cleared");
         }
 

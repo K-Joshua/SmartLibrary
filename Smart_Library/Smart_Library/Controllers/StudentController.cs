@@ -26,7 +26,7 @@ namespace Smart_Library.Controllers
         }
 
 		[HttpGet]
-		[Route("/GetAllBookIssue/")]
+		[Route("/GetAllBookIssue/Student")]
 		public IActionResult BookIssue()
 		{
 			List<BookIssueDto> borrowedbooks = new List<BookIssueDto>();

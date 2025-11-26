@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -7,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Smart_Library.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial_Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,10 +25,8 @@ namespace Smart_Library.Migrations
                     Publisher = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     YearPublish = table.Column<DateOnly>(type: "date", nullable: false),
                     Category = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    isBorrowed = table.Column<bool>(type: "boolean", maxLength: 255, nullable: true),
                     Condition = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false, defaultValue: "Good"),
-                    RentCost = table.Column<float>(type: "numeric(18,2)", nullable: false, defaultValue: 0.0),
-                    NumberOfCopies = table.Column<int>(type: "integer", nullable: false),
-                    NumberOfAvailableCopies = table.Column<int>(type: "integer", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     UpdatedBy = table.Column<string>(type: "text", nullable: true),
@@ -47,9 +46,7 @@ namespace Smart_Library.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     Department = table.Column<string>(type: "text", nullable: false),
                     GradeLevel = table.Column<int>(type: "integer", nullable: false),
-                    TotalNumberOfBooksBorrowed = table.Column<int>(type: "integer", nullable: false),
-                    CurrentNumberOfBooksBorrowed = table.Column<int>(type: "integer", nullable: false),
-                    PositionLevel = table.Column<int>(type: "integer", nullable: false, defaultValue: 1)
+                    Position = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,6 +85,7 @@ namespace Smart_Library.Migrations
                     BorrowDate = table.Column<DateOnly>(type: "date", nullable: false, defaultValueSql: "NOW()"),
                     DueDate = table.Column<DateOnly>(type: "date", nullable: false),
                     ReturnDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    book_id = table.Column<List<int>>(type: "integer[]", nullable: false),
                     TransactionStatus = table.Column<string>(type: "text", nullable: false),
                     FineId = table.Column<int>(type: "integer", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: false),
@@ -108,8 +106,6 @@ namespace Smart_Library.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     GradeLevel = table.Column<int>(type: "integer", nullable: false),
-                    TotalNumberOfBooksBorrowed = table.Column<int>(type: "integer", nullable: false),
-                    CurrentNumberOfBooksBorrowed = table.Column<int>(type: "integer", nullable: false),
                     Course = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -123,11 +119,12 @@ namespace Smart_Library.Migrations
                 {
                     UserId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Username = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
                     isActive = table.Column<bool>(type: "boolean", nullable: false),
-                    Birthday = table.Column<DateOnly>(type: "date", nullable: true)
+                    Role = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,5 +1,26 @@
 [
   {
+    "ContainingType": "Smart_Library.Controllers.LoanController",
+    "Method": "UpdateBorrowedBooks",
+    "RelativePath": "AddFine/{loanId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addfine",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddFineByLibrarian",
+        "IsRequired": true
+      },
+      {
+        "Name": "loanId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Smart_Library.Controllers.BookController",
     "Method": "GetBooks",
     "RelativePath": "api/Book",
@@ -101,7 +122,7 @@
   },
   {
     "ContainingType": "Smart_Library.Controllers.FacultyController",
-    "Method": "GetFaculties",
+    "Method": "GetBorrower",
     "RelativePath": "api/Faculty",
     "HttpMethod": "GET",
     "IsController": true,
@@ -127,14 +148,14 @@
   },
   {
     "ContainingType": "Smart_Library.Controllers.FacultyController",
-    "Method": "GetFaculty",
-    "RelativePath": "api/Faculty/{facultyId}",
+    "Method": "GetBorrower",
+    "RelativePath": "api/Faculty/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "facultyId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -144,19 +165,19 @@
   {
     "ContainingType": "Smart_Library.Controllers.FacultyController",
     "Method": "UpdateFaculty",
-    "RelativePath": "api/Faculty/{facultyId}",
+    "RelativePath": "api/Faculty/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "facultyId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       },
       {
         "Name": "updateFaculty",
-        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddFacultyDTO",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.UpdateFacultyDTO",
         "IsRequired": true
       }
     ],
@@ -164,14 +185,14 @@
   },
   {
     "ContainingType": "Smart_Library.Controllers.FacultyController",
-    "Method": "DeleteFaculty",
-    "RelativePath": "api/Faculty/{facultyId}",
+    "Method": "DeleteBorrower",
+    "RelativePath": "api/Faculty/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "facultyId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -338,7 +359,7 @@
   },
   {
     "ContainingType": "Smart_Library.Controllers.StudentController",
-    "Method": "GetStudents",
+    "Method": "GetBorrower",
     "RelativePath": "api/Student",
     "HttpMethod": "GET",
     "IsController": true,
@@ -348,7 +369,7 @@
   },
   {
     "ContainingType": "Smart_Library.Controllers.StudentController",
-    "Method": "AddStudent",
+    "Method": "AddBorrower",
     "RelativePath": "api/Student",
     "HttpMethod": "POST",
     "IsController": true,
@@ -364,14 +385,14 @@
   },
   {
     "ContainingType": "Smart_Library.Controllers.StudentController",
-    "Method": "GetStudent",
-    "RelativePath": "api/Student/{studentId}",
+    "Method": "GetBorrower",
+    "RelativePath": "api/Student/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "studentId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -380,14 +401,14 @@
   },
   {
     "ContainingType": "Smart_Library.Controllers.StudentController",
-    "Method": "UpdateStudent",
-    "RelativePath": "api/Student/{studentId}",
+    "Method": "UpdateBorrower",
+    "RelativePath": "api/Student/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "studentId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       },
@@ -401,14 +422,14 @@
   },
   {
     "ContainingType": "Smart_Library.Controllers.StudentController",
-    "Method": "DeleteStudent",
-    "RelativePath": "api/Student/{studentId}",
+    "Method": "DeleteBorrower",
+    "RelativePath": "api/Student/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "studentId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -456,7 +477,7 @@
       },
       {
         "Name": "updateUser",
-        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddUserDTOs",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.UpdateUserDTOs",
         "IsRequired": true
       }
     ],
@@ -495,6 +516,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Smart_Library.Controllers.FacultyController",
+    "Method": "BookIssue",
+    "RelativePath": "GetAllBookIssue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.StudentController",
+    "Method": "BookIssue",
+    "RelativePath": "GetAllBookIssue/Student",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Smart_Library.Controllers.BookController",
     "Method": "GetAllBorrowedBook",
     "RelativePath": "GetAllBorrowed",
@@ -502,6 +543,32 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.BookController",
+    "Method": "GetAllBorrowedHistory",
+    "RelativePath": "GetAllBorrowed/History",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.UserController",
+    "Method": "Getname",
+    "RelativePath": "GetUsername",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -556,26 +623,5 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Smart_Library.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Smart_Library.WeatherForecast, Smart_Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ],
-    "EndpointName": "GetWeatherForecast"
   }
 ]
