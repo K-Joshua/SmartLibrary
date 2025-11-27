@@ -25,35 +25,34 @@ namespace Smart_Library.Controllers
         }
 
         [HttpGet]
-        [Route("/GetAllBorrowed")]
-        public IActionResult GetAllBorrowedBook()
+        [Route("/GetAllBorrowed/")]
+        public IActionResult BookIssue()
         {
-            List <GetBooksAndRequest> borrowedbooks = new List<GetBooksAndRequest>();
-			var get_loans = db.Loans.Where( loan => loan.TransactionStatus == "Borrowed").ToList();
-			if (!get_loans.Any() || get_loans.Count() == 0)
+            List<BookIssueDto> borrowedbooks = new List<BookIssueDto>();
+            var get_loans = db.Loans.Where(loan => loan.TransactionStatus == "Borrowed").ToList();
+            if (!get_loans.Any() || get_loans.Count() == 0)
                 return NotFound("No Books Added");
-
             foreach (var loan in get_loans)
             {
                 if (loan.book_id is null) continue;
                 var get_loan = db.Loans.Find(loan.LoanId);
+                var get_user = db.Users.Find(loan.ClientId);
                 foreach (var book in loan.book_id)
                 {
                     var get_book = db.Books.Find(book);
                     if (get_book == null) continue;
-                    var get_user = db.Users.Find(loan.ClientId);
-                    var payload = new GetBooksAndRequest
+                    var payload = new BookIssueDto
                     {
-                        book_id=get_book.BookId,
-                        Title=get_book.Title,
-                        Publisher=get_book.Publisher,
-                        YearPublish=get_book.YearPublish,
-                        BorrowDate=get_loan!.BorrowDate,
-                        DueDate=get_loan!.DueDate,
-                        Username=get_user!.Username,
-                        Role=get_user!.Role,
+                        MemberId = get_user!.UserId,
+                        BookId = get_book.BookId,
+                        LoanId = get_loan!.LoanId,
+                        Name = get_user.Name,
+                        Title = get_book.Title,
+                        Author = get_book.Author,
+                        BorrowDate = get_loan.BorrowDate,
+                        DueDate = get_loan.DueDate,
                     };
-                    borrowedbooks.Append(payload);
+                    borrowedbooks.Add(payload);
                 }
             }
             return Json(borrowedbooks);
@@ -61,7 +60,7 @@ namespace Smart_Library.Controllers
 
 
 
-		[HttpGet]
+        [HttpGet]
 		[Route("/GetAllBorrowed/History")]
 		public IActionResult GetAllBorrowedHistory()
 		{

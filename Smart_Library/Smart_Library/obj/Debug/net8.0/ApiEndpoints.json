@@ -537,7 +537,7 @@
   },
   {
     "ContainingType": "Smart_Library.Controllers.BookController",
-    "Method": "GetAllBorrowedBook",
+    "Method": "BookIssue",
     "RelativePath": "GetAllBorrowed",
     "HttpMethod": "GET",
     "IsController": true,
