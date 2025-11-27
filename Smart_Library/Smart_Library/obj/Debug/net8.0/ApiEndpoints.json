@@ -1,26 +1,5 @@
 [
   {
-    "ContainingType": "Smart_Library.Controllers.LoanController",
-    "Method": "UpdateBorrowedBooks",
-    "RelativePath": "AddFine/{loanId}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "addfine",
-        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddFineByLibrarian",
-        "IsRequired": true
-      },
-      {
-        "Name": "loanId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "Smart_Library.Controllers.BookController",
     "Method": "GetBooks",
     "RelativePath": "api/Book",
@@ -121,6 +100,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Smart_Library.Controllers.BookController",
+    "Method": "BookIssue",
+    "RelativePath": "api/Book/GetAllBorrowed",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.BookController",
+    "Method": "GetAllBorrowedHistory",
+    "RelativePath": "api/Book/GetAllBorrowed/History",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Smart_Library.Controllers.FacultyController",
     "Method": "GetBorrower",
     "RelativePath": "api/Faculty",
@@ -197,6 +196,26 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.FacultyController",
+    "Method": "BookIssue",
+    "RelativePath": "api/Faculty/GetAllBookIssue/Faculty",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.FacultyController",
+    "Method": "GetAllUser",
+    "RelativePath": "api/Faculty/GetAllUser/Faculty",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -358,6 +377,64 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Smart_Library.Controllers.LoanController",
+    "Method": "UpdateBorrowedBooks",
+    "RelativePath": "api/Loan/AddFine/{loanId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addfine",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddFineByLibrarian",
+        "IsRequired": true
+      },
+      {
+        "Name": "loanId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.LoanController",
+    "Method": "ClearBorrowedBooks",
+    "RelativePath": "api/Loan/ClearBorrowedBooks/{loanId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loanId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.LoanController",
+    "Method": "UpdateBorrowedBooks",
+    "RelativePath": "api/Loan/UpdateBorrowedBooks/{loanId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "borrowedbooks",
+        "Type": "Smart_Library.SmartLibraryManagement.DTOs.UpdateBooksBorrowedInLoan",
+        "IsRequired": true
+      },
+      {
+        "Name": "loanId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Smart_Library.Controllers.StudentController",
     "Method": "GetBorrower",
     "RelativePath": "api/Student",
@@ -437,6 +514,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Smart_Library.Controllers.StudentController",
+    "Method": "BookIssue",
+    "RelativePath": "api/Student/GetAllBookIssue/Student",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.StudentController",
+    "Method": "GetAllUser",
+    "RelativePath": "api/Student/GetAllUser/Student",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Smart_Library.Controllers.UserController",
     "Method": "GetUsers",
     "RelativePath": "api/User",
@@ -500,62 +597,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Smart_Library.Controllers.LoanController",
-    "Method": "ClearBorrowedBooks",
-    "RelativePath": "ClearBorrowedBooks/{loanId}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "loanId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Smart_Library.Controllers.FacultyController",
-    "Method": "BookIssue",
-    "RelativePath": "GetAllBookIssue",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Smart_Library.Controllers.StudentController",
-    "Method": "BookIssue",
-    "RelativePath": "GetAllBookIssue/Student",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Smart_Library.Controllers.BookController",
-    "Method": "BookIssue",
-    "RelativePath": "GetAllBorrowed",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Smart_Library.Controllers.BookController",
-    "Method": "GetAllBorrowedHistory",
-    "RelativePath": "GetAllBorrowed/History",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "Smart_Library.Controllers.UserController",
     "Method": "Getname",
     "RelativePath": "GetUsername",
@@ -598,27 +639,6 @@
       {
         "Name": "addUser",
         "Type": "Smart_Library.SmartLibraryManagement.DTOs.AddUserDTOs",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Smart_Library.Controllers.LoanController",
-    "Method": "UpdateBorrowedBooks",
-    "RelativePath": "UpdateBorrowedBooks/{loanId}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "borrowedbooks",
-        "Type": "Smart_Library.SmartLibraryManagement.DTOs.UpdateBooksBorrowedInLoan",
-        "IsRequired": true
-      },
-      {
-        "Name": "loanId",
-        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

@@ -7,8 +7,6 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
     {
         public required int UserId { get; set; }
         public required int GradeLevel { get; set; }
-        //public required int TotalNumberOfBooksBorrowed { get; set; }
-        //public required int CurrentNumberOfBooksBorrowed { get; set; }
         public required string Course { get; set; }
     }
 
@@ -17,8 +15,19 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
         public required int StudentId { get; set; }
         public required int UserId { get; set; }
         public required int GradeLevel { get; set; }
-        //public required int TotalNumberOfBooksBorrowed { get; set; }
-        //public required int CurrentNumberOfBooksBorrowed { get; set; }
+        public required string Course { get; set; }
+    }
+
+    public class GetUserInformationStudent
+    {
+        public required int StudentId { get; set; }
+        public required int UserId { get; set; }
+        public required string Name { get; set; }
+        public required string Username { get; set; }
+        public required string Email { get; set; }
+        public required bool isActive { get; set; }
+        public required string Role { get; set; }
+        public required int GradeLevel { get; set; }
         public required string Course { get; set; }
     }
 }

@@ -87,7 +87,7 @@ namespace Smart_Library.Controllers
 
         [HttpDelete]
         [Route("{fineId:int}")]
-        public IActionResult DeleteFine(int fineId)
+        public IActionResult DeleteFine(int fineId) 
         {
             var getFine = db.Fines.Find(fineId);
             if (getFine == null) return NotFound($"#404!, Id {fineId} Not Found");

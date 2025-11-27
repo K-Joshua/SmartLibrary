@@ -1,6 +1,6 @@
 ﻿namespace Smart_Library.SmartLibraryManagement.Service
 {
-    public class StudentService : BorrowServiceBase
+    public class StudentService : BaseService
     {
         public override float GetTotalFine(int numberOfData, string position)
         {

@@ -24,8 +24,34 @@ namespace Smart_Library.Controllers
             return (!faculties.Any()) ? NotFound("No Faculties Registered") : Ok(faculties);
         }
 
-		[HttpGet]
-		[Route("/GetAllBookIssue/")]
+        [HttpGet]
+        [Route("GetAllUser/Faculty")]
+        public IActionResult GetAllUser()
+        {
+            List<GetUserInformationFaculty> payload = new List<GetUserInformationFaculty>();
+            var get_faculty = db.Faculties.ToList();
+            foreach (var faculty in get_faculty)
+            {
+                var get_user = db.Users.Find(faculty.UserId);
+                var payloadOne = new GetUserInformationFaculty()
+                {
+                    UserId= faculty.UserId,
+                    Name=get_user!.Name,
+                    Email=get_user!.Email,
+                    isActive=get_user!.isActive,
+                    Role=get_user!.Role,
+                    Username=get_user!.Username,
+                    FacultytId=faculty.UserId,
+                    Department=faculty.Department,
+                    Position=faculty.Position,
+                };
+                payload.Add(payloadOne);
+            }
+            return Ok(payload);
+        }
+
+        [HttpGet]
+		[Route("GetAllBookIssue/Faculty")]
 		public IActionResult BookIssue()
 		{
 			List<BookIssueDto> borrowedbooks = new List<BookIssueDto>();

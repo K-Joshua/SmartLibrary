@@ -25,7 +25,7 @@ namespace Smart_Library.Controllers
         }
 
         [HttpGet]
-        [Route("/GetAllBorrowed/")]
+        [Route("GetAllBorrowed/")]
         public IActionResult BookIssue()
         {
             List<BookIssueDto> borrowedbooks = new List<BookIssueDto>();
@@ -61,7 +61,7 @@ namespace Smart_Library.Controllers
 
 
         [HttpGet]
-		[Route("/GetAllBorrowed/History")]
+		[Route("GetAllBorrowed/History")]
 		public IActionResult GetAllBorrowedHistory()
 		{
 			List<GetBooksAndRequest> borrowedbooks = new List<GetBooksAndRequest>();

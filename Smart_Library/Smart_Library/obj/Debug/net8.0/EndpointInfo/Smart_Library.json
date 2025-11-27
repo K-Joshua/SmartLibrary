@@ -46,7 +46,7 @@
         }
       }
     },
-    "/GetAllBorrowed": {
+    "/api/Book/GetAllBorrowed": {
       "get": {
         "tags": [
           "Book"
@@ -58,7 +58,7 @@
         }
       }
     },
-    "/GetAllBorrowed/History": {
+    "/api/Book/GetAllBorrowed/History": {
       "get": {
         "tags": [
           "Book"
@@ -237,7 +237,19 @@
         }
       }
     },
-    "/GetAllBookIssue": {
+    "/api/Faculty/GetAllUser/Faculty": {
+      "get": {
+        "tags": [
+          "Faculty"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Faculty/GetAllBookIssue/Faculty": {
       "get": {
         "tags": [
           "Faculty"
@@ -583,7 +595,7 @@
         }
       }
     },
-    "/AddFine/{loanId}": {
+    "/api/Loan/AddFine/{loanId}": {
       "put": {
         "tags": [
           "Loan"
@@ -625,7 +637,7 @@
         }
       }
     },
-    "/UpdateBorrowedBooks/{loanId}": {
+    "/api/Loan/UpdateBorrowedBooks/{loanId}": {
       "put": {
         "tags": [
           "Loan"
@@ -667,7 +679,7 @@
         }
       }
     },
-    "/ClearBorrowedBooks/{loanId}": {
+    "/api/Loan/ClearBorrowedBooks/{loanId}": {
       "put": {
         "tags": [
           "Loan"
@@ -731,7 +743,19 @@
         }
       }
     },
-    "/GetAllBookIssue/Student": {
+    "/api/Student/GetAllUser/Student": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Student/GetAllBookIssue/Student": {
       "get": {
         "tags": [
           "Student"

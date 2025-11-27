@@ -1,6 +1,6 @@
 ﻿namespace Smart_Library.SmartLibraryManagement.Service
 {
-    public class BorrowServiceBase
+    public abstract class BaseService
     {
         public virtual Dictionary<string, float> finecost { get; } = new Dictionary<string, float>()
         {

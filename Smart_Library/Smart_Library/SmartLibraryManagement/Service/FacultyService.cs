@@ -2,7 +2,7 @@
 
 namespace Smart_Library.SmartLibraryManagement.Service
 {
-    public class FacultyService : BorrowServiceBase
+    public class FacultyService : BaseService 
     {
         public override Dictionary<string, float> finecost { get; } = new Dictionary<string, float>()
         {

@@ -102,7 +102,7 @@ namespace Smart_Library.Controllers
 
 
         [HttpPut]
-        [Route("/AddFine/{loanId:int}")]
+        [Route("AddFine/{loanId:int}")]
         public IActionResult UpdateBorrowedBooks(AddFineByLibrarian addfine, int loanId)
         {
             var get_loan = db.Loans.Find(loanId);
@@ -122,7 +122,7 @@ namespace Smart_Library.Controllers
         public DateTime? UpdatedAt { get; set; }
 
         [HttpPut]
-        [Route("/UpdateBorrowedBooks/{loanId:int}")]
+        [Route("UpdateBorrowedBooks/{loanId:int}")]
         public IActionResult UpdateBorrowedBooks(UpdateBooksBorrowedInLoan borrowedbooks, int loanId)
         {
             var get_loan = db.Loans.Find(loanId);
@@ -144,7 +144,7 @@ namespace Smart_Library.Controllers
         }
 
         [HttpPut]
-        [Route("/ClearBorrowedBooks/{loanId:int}")]
+        [Route("ClearBorrowedBooks/{loanId:int}")]
         public IActionResult ClearBorrowedBooks(int loanId)
         {
             var get_loan = db.Loans.Find(loanId);
