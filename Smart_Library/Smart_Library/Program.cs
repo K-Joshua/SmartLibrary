@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Smart_Library.SmartLibraryManagement;
+using Smart_Library.SmartLibraryManagement.Interface;
+using Smart_Library.SmartLibraryManagement.Repositories;
+using Smart_Library.SmartLibraryManagement.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +27,12 @@ builder.Services.AddCors(options =>
                                  .AllowAnyHeader()
                                  .AllowAnyMethod());
 });
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+builder.Services.AddScoped<IFineRepository, FineRepository>();
+builder.Services.AddScoped<IFacultyRepository, FacultyRepository>();
 
 var app = builder.Build();
 

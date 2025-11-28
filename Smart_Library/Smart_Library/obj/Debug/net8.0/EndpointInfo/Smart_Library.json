@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Book": {
+    "/SmartLibrary/Book": {
       "get": {
         "tags": [
           "Book"
@@ -46,7 +46,7 @@
         }
       }
     },
-    "/api/Book/GetAllBorrowed": {
+    "/SmartLibrary/Book/GetAllBorrowed": {
       "get": {
         "tags": [
           "Book"
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/api/Book/{bookId}": {
+    "/SmartLibrary/Book/{bookId}": {
       "get": {
         "tags": [
           "Book"
@@ -154,7 +154,7 @@
         }
       }
     },
-    "/api/Book/BorrowBookUpdate/{bookId}": {
+    "/SmartLibrary/Book/BorrowBookUpdate/{bookId}": {
       "put": {
         "tags": [
           "Book"
@@ -196,7 +196,7 @@
         }
       }
     },
-    "/api/Faculty": {
+    "/SmartLibrary/Faculty": {
       "get": {
         "tags": [
           "Faculty"
@@ -237,31 +237,7 @@
         }
       }
     },
-    "/api/Faculty/GetAllUser/Faculty": {
-      "get": {
-        "tags": [
-          "Faculty"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Faculty/GetAllBookIssue/Faculty": {
-      "get": {
-        "tags": [
-          "Faculty"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Faculty/{id}": {
+    "/SmartLibrary/Faculty/{id}": {
       "get": {
         "tags": [
           "Faculty"
@@ -345,7 +321,7 @@
         }
       }
     },
-    "/api/Fine": {
+    "/SmartLibrary/Fine": {
       "get": {
         "tags": [
           "Fine"
@@ -386,7 +362,7 @@
         }
       }
     },
-    "/api/Fine/{fineId}": {
+    "/SmartLibrary/Fine/{fineId}": {
       "get": {
         "tags": [
           "Fine"
@@ -470,7 +446,7 @@
         }
       }
     },
-    "/api/Loan": {
+    "/SmartLibrary/Loan": {
       "get": {
         "tags": [
           "Loan"
@@ -511,7 +487,7 @@
         }
       }
     },
-    "/api/Loan/{loanId}": {
+    "/SmartLibrary/Loan/{loanId}": {
       "get": {
         "tags": [
           "Loan"
@@ -527,46 +503,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Loan"
-        ],
-        "parameters": [
-          {
-            "name": "loanId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddLoanDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddLoanDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddLoanDTO"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -595,7 +531,7 @@
         }
       }
     },
-    "/api/Loan/AddFine/{loanId}": {
+    "/SmartLibrary/Loan/AddFine/{loanId}": {
       "put": {
         "tags": [
           "Loan"
@@ -637,7 +573,7 @@
         }
       }
     },
-    "/api/Loan/UpdateBorrowedBooks/{loanId}": {
+    "/SmartLibrary/Loan/UpdateBorrowedBooks/{loanId}": {
       "put": {
         "tags": [
           "Loan"
@@ -679,30 +615,7 @@
         }
       }
     },
-    "/api/Loan/ClearBorrowedBooks/{loanId}": {
-      "put": {
-        "tags": [
-          "Loan"
-        ],
-        "parameters": [
-          {
-            "name": "loanId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Student": {
+    "/SmartLibrary/Student": {
       "get": {
         "tags": [
           "Student"
@@ -743,7 +656,7 @@
         }
       }
     },
-    "/api/Student/GetAllUser/Student": {
+    "/SmartLibrary/Student/GetAllUser/Student": {
       "get": {
         "tags": [
           "Student"
@@ -755,19 +668,7 @@
         }
       }
     },
-    "/api/Student/GetAllBookIssue/Student": {
-      "get": {
-        "tags": [
-          "Student"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Student/{id}": {
+    "/SmartLibrary/Student/{id}": {
       "get": {
         "tags": [
           "Student"
@@ -851,7 +752,7 @@
         }
       }
     },
-    "/api/User": {
+    "/SmartLibrary/User": {
       "get": {
         "tags": [
           "User"
@@ -863,29 +764,7 @@
         }
       }
     },
-    "/GetUsername": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/User/{userId}": {
+    "/SmartLibrary/User/{userId}": {
       "get": {
         "tags": [
           "User"
@@ -1307,11 +1186,13 @@
         "additionalProperties": false
       },
       "UpdateBookBorrowed": {
+        "required": [
+          "isBorrowed"
+        ],
         "type": "object",
         "properties": {
           "isBorrowed": {
-            "type": "boolean",
-            "nullable": true
+            "type": "boolean"
           }
         },
         "additionalProperties": false

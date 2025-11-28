@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Smart_Library.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("SmartLibrary/[controller]")]
     [ApiController]
     public class BookController : Controller
     {
@@ -16,7 +16,7 @@ namespace Smart_Library.Controllers
         {
             this.db = db;
         }
-
+            
         [HttpGet]
         public IActionResult GetBooks()
         {
@@ -58,8 +58,6 @@ namespace Smart_Library.Controllers
             return Ok(borrowedbooks);
         }
 
-
-
         [HttpGet]
 		[Route("/GetAllBorrowed/History")]
 		public IActionResult GetAllBorrowedHistory()
@@ -72,7 +70,6 @@ namespace Smart_Library.Controllers
 			foreach (var loan in get_loans)
 			{
 				if (loan.book_id is null) continue;
-				var get_loan = db.Loans.Find(loan.LoanId);
 				foreach (var book in loan.book_id)
 				{
 					var get_book = db.Books.Find(book);
@@ -84,8 +81,8 @@ namespace Smart_Library.Controllers
 						Title=get_book.Title,
 						Publisher=get_book.Publisher,
 						YearPublish=get_book.YearPublish,
-						BorrowDate=get_loan!.BorrowDate,
-						DueDate=get_loan!.DueDate,
+						BorrowDate=loan!.BorrowDate,
+						DueDate=loan!.DueDate,
 						Username=get_user!.Username,
 						Role=get_user!.Role,
 					};
@@ -116,8 +113,8 @@ namespace Smart_Library.Controllers
                 Category = addBook.Category,
                 isBorrowed = false,
                 Condition = addBook.Condition,
-                CreatedBy = addBook.CreatedBy,
-                CreatedAt = addBook.CreatedAt
+                CreatedBy = "Librarian",
+                CreatedAt = DateTime.UtcNow
             };
 
             db.Books.Add(book);
@@ -132,6 +129,7 @@ namespace Smart_Library.Controllers
                 Publisher = book.Publisher,
                 YearPublish = book.YearPublish,
                 Category = book.Category,
+                isBorrowed = book.isBorrowed,
                 Condition = book.Condition,
                 CreatedBy = "Librarian",
                 CreatedAt = DateTime.UtcNow,
@@ -170,8 +168,8 @@ namespace Smart_Library.Controllers
             getBook.YearPublish = updateBook.YearPublish;
             getBook.Category = updateBook.Category;
             getBook.Condition = updateBook.Condition;
-            getBook.UpdatedBy = updateBook.CreatedBy;
-            getBook.UpdatedAt = updateBook.CreatedAt;
+            getBook.UpdatedBy = "Librarian";
+            getBook.UpdatedAt = DateTime.UtcNow;
 
             db.Entry(getBook).State = EntityState.Modified;
             db.SaveChanges();

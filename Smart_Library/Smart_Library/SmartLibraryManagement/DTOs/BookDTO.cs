@@ -16,7 +16,7 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
     }
     public class UpdateBookBorrowed
     {
-        public bool? isBorrowed { get; set; }
+        public required bool isBorrowed { get; set; } = false;
     }
     public class AddBookDTO
     {
@@ -40,7 +40,7 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
         public required string Publisher { get; set; }
         public required DateOnly YearPublish { get; set; }
         public required string Category { get; set; }
-        public bool? isBorrowed { get; set; }
+        public required bool isBorrowed { get; set; }
         public required string Condition { get; set; }
         public required string CreatedBy { get; set; }
         public required DateTime CreatedAt { get; set; }
