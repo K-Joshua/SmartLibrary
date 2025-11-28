@@ -102,7 +102,7 @@ namespace Smart_Library.Controllers
             var get_user = db.Users.Where(e => e.Email  == logindto.Email || e.Username == logindto.Email).FirstOrDefault();
             if (get_user == null) return Unauthorized("Invalid Credentials! Email Incorrect");
             if (BCrypt.Net.BCrypt.Verify(logindto.Password, get_user.PasswordHash) == false) return Unauthorized("Invalid Credentials! Password Incorrect");
-            return Ok($"Login Successful, Welcome Back {get_user.Username}");
+            return Ok(new { Message = $"Login Successful, Welcome Back {get_user.Username}" });
         }
 
         [HttpPut]

@@ -110,16 +110,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Smart_Library.Controllers.BookController",
-    "Method": "GetAllBorrowedHistory",
-    "RelativePath": "api/Book/GetAllBorrowed/History",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "Smart_Library.Controllers.FacultyController",
     "Method": "GetBorrower",
     "RelativePath": "api/Faculty",
@@ -594,6 +584,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Smart_Library.Controllers.BookController",
+    "Method": "GetAllBorrowedHistory",
+    "RelativePath": "GetAllBorrowed/History",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

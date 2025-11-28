@@ -58,7 +58,7 @@
         }
       }
     },
-    "/api/Book/GetAllBorrowed/History": {
+    "/GetAllBorrowed/History": {
       "get": {
         "tags": [
           "Book"
@@ -1139,18 +1139,13 @@
         "required": [
           "createdAt",
           "createdBy",
-          "loanId",
-          "totalAmount"
+          "loanId"
         ],
         "type": "object",
         "properties": {
           "loanId": {
             "type": "integer",
             "format": "int32"
-          },
-          "totalAmount": {
-            "type": "number",
-            "format": "double"
           },
           "isPaid": {
             "type": "boolean"
@@ -1267,7 +1262,6 @@
           "isActive",
           "name",
           "password",
-          "role",
           "username"
         ],
         "type": "object",
@@ -1290,10 +1284,6 @@
           },
           "isActive": {
             "type": "boolean"
-          },
-          "role": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false

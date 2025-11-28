@@ -46,7 +46,6 @@ namespace Smart_Library.Controllers
                     return NotFound($"Book Id {bookId} Not Found");
 
                 book.isBorrowed = true;
-                //book.
                 booksToBorrow.Add(book);
             }
 

@@ -2,9 +2,9 @@
 {
     public class StudentService : BaseService
     {
-        public override float GetTotalFine(int numberOfData, string position)
+        public override decimal GetTotalFine(int numberOfData, string position)
         {
-            float totalCost = (float)numberOfData * 2;
+            decimal totalCost = (decimal)numberOfData * 2;
             return totalCost;
         }
 

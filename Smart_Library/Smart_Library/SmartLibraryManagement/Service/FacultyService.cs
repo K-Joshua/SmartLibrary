@@ -4,7 +4,7 @@ namespace Smart_Library.SmartLibraryManagement.Service
 {
     public class FacultyService : BaseService 
     {
-        public override Dictionary<string, float> finecost { get; } = new Dictionary<string, float>()
+        public override Dictionary<string, decimal> finecost { get; } = new Dictionary<string, decimal>()
         {
             {"Student Teacher", 5},
             {"Teacher", 10},

@@ -55,13 +55,13 @@ namespace Smart_Library.Controllers
                     borrowedbooks.Add(payload);
                 }
             }
-            return Json(borrowedbooks);
+            return Ok(borrowedbooks);
         }
 
 
 
         [HttpGet]
-		[Route("GetAllBorrowed/History")]
+		[Route("/GetAllBorrowed/History")]
 		public IActionResult GetAllBorrowedHistory()
 		{
 			List<GetBooksAndRequest> borrowedbooks = new List<GetBooksAndRequest>();
@@ -92,7 +92,7 @@ namespace Smart_Library.Controllers
 					borrowedbooks.Append(payload);
 				}
 			}
-			return Json(borrowedbooks);
+			return Ok(borrowedbooks);
 		}
 
 		[HttpGet]

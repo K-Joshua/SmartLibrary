@@ -6,7 +6,6 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
     public class AddFineDTO
     {
         public required int LoanId { get; set; }
-        public required decimal TotalAmount { get; set; }
         public bool isPaid { get; set; }
         public DateTime? PaidAt { get; set; }
         public required string CreatedBy { get; set; }

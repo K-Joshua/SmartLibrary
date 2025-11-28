@@ -2,25 +2,25 @@
 {
     public abstract class BaseService
     {
-        public virtual Dictionary<string, float> finecost { get; } = new Dictionary<string, float>()
+        public virtual Dictionary<string, decimal> finecost { get; } = new Dictionary<string, decimal>()
         {
         };
 
         public virtual Dictionary<string, int> daytime { get; } = new Dictionary<string, int>()
         {
         };
-        public float GetFineCost(string position)
+        public decimal GetFineCost(string position)
         {
-            if (finecost.TryGetValue(position, out float fine))
+            if (finecost.TryGetValue(position, out decimal fine))
                 return fine;
 
             return 2; // or any default value, might be a student so 2
         }
 
-        public virtual float GetTotalFine(int numberOfData, string position)
+        public virtual decimal GetTotalFine(int numberOfData, string position)
         {
-            float fine = GetFineCost(position);
-            float totalCost = (float)numberOfData * fine;
+            decimal fine = GetFineCost(position);
+            decimal totalCost = (decimal)numberOfData * fine;
             return totalCost;
         }
         public virtual int GetDayDueDateByPosition(string position)

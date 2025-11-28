@@ -13,7 +13,6 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
         public required string Password { get; set; }
 
         public required bool isActive { get; set; }
-        public required string Role { get; set; }
     }
 
     public class UpdateUserDTOs
