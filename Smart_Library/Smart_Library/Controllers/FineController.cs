@@ -10,7 +10,6 @@ public class FineController : ControllerBase
 {
     private readonly IFineRepository _fineRepository;
 
-    // <constructor>
     public FineController(IFineRepository fineRepository)
     {
         _fineRepository = fineRepository;

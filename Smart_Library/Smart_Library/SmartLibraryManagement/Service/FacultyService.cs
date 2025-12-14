@@ -2,7 +2,7 @@
 
 namespace Smart_Library.SmartLibraryManagement.Service
 {
-    public class FacultyService : BaseService 
+    public class FacultyService : FineService 
     {
         public override Dictionary<string, decimal> finecost { get; } = new Dictionary<string, decimal>()
         {
@@ -35,5 +35,6 @@ namespace Smart_Library.SmartLibraryManagement.Service
             {"Director", 10},
             {"Principal", 12}
         };
+
     }
 }

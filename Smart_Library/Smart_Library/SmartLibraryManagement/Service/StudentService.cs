@@ -1,6 +1,6 @@
 ﻿namespace Smart_Library.SmartLibraryManagement.Service
 {
-    public class StudentService : BaseService
+    public class StudentService : FineService
     {
         public override decimal GetTotalFine(int numberOfData, string position)
         {

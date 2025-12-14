@@ -20,19 +20,21 @@ builder.Services.AddDbContext<DatabaseLibrary>(options =>
 
 builder.Services.AddMemoryCache();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy( "AllowAll",
-        policy => policy.AllowAnyOrigin()
-                                 .AllowAnyHeader()
-                                 .AllowAnyMethod());
-});
+//register cors to use later~
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy( "AllowAll",
+            policy => policy.AllowAnyOrigin()
+                                     .AllowAnyHeader()
+                                     .AllowAnyMethod());
+    });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 builder.Services.AddScoped<IFineRepository, FineRepository>();
 builder.Services.AddScoped<IFacultyRepository, FacultyRepository>();
+builder.Services.AddScoped<IBookRepository,  BookRepository>();
 
 var app = builder.Build();
 
@@ -43,6 +45,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 
+//use the cors~
 app.UseCors("AllowAll");
 
 app.UseAuthorization();

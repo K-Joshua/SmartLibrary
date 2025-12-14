@@ -33,7 +33,7 @@ public class UserController : ControllerBase
 
         return Ok(payloadList);
     }
-
+        
     [HttpGet("{userId:int}")]
     public async Task<IActionResult> GetUser(int userId)
     {
@@ -102,7 +102,7 @@ public class UserController : ControllerBase
 
         user.Username = updateUser.Username;
         await _userRepository.UpdateAsync(user);
-
+            
         return Ok(user);
     }
 

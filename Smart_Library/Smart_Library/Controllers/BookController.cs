@@ -1,109 +1,39 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Smart_Library.SmartLibraryManagement;
-using Smart_Library.SmartLibraryManagement.Models;
 using Smart_Library.SmartLibraryManagement.DTOs;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Smart_Library.SmartLibraryManagement.Interface;
+using Smart_Library.SmartLibraryManagement.Models;
 
 namespace Smart_Library.Controllers
 {
     [Route("SmartLibrary/[controller]")]
     [ApiController]
-    public class BookController : Controller
+    public class BookController : ControllerBase
     {
-        private readonly DatabaseLibrary db;
-        public BookController(DatabaseLibrary db)
+        private readonly IBookRepository _bookRepository;
+
+        public BookController(IBookRepository bookRepository)
         {
-            this.db = db;
+            _bookRepository = bookRepository;
         }
-            
+
         [HttpGet]
-        public IActionResult GetBooks()
+        public async Task<IActionResult> GetBooks()
         {
-            var books = db.Books.ToList();
+            var books = await _bookRepository.GetAllAsync();
             return (!books.Any()) ? NotFound("No Books Registered") : Ok(books);
         }
 
-        [HttpGet]
-        [Route("GetAllBorrowed/")]
-        public IActionResult BookIssue()
+        [HttpGet("{bookId:int}")]
+        public async Task<IActionResult> GetBook(int bookId)
         {
-            List<BookIssueDto> borrowedbooks = new List<BookIssueDto>();
-            var get_loans = db.Loans.Where(loan => loan.TransactionStatus == "Borrowed").ToList();
-            if (!get_loans.Any() || get_loans.Count() == 0)
-                return NotFound("No Books Added");
-            foreach (var loan in get_loans)
-            {
-                if (loan.book_id is null) continue;
-                var get_loan = db.Loans.Find(loan.LoanId);
-                var get_user = db.Users.Find(loan.ClientId);
-                foreach (var book in loan.book_id)
-                {
-                    var get_book = db.Books.Find(book);
-                    if (get_book == null) continue;
-                    var payload = new BookIssueDto
-                    {
-                        MemberId = get_user!.UserId,
-                        BookId = get_book.BookId,
-                        LoanId = get_loan!.LoanId,
-                        Name = get_user.Name,
-                        Title = get_book.Title,
-                        Author = get_book.Author,
-                        BorrowDate = get_loan.BorrowDate,
-                        DueDate = get_loan.DueDate,
-                    };
-                    borrowedbooks.Add(payload);
-                }
-            }
-            return Ok(borrowedbooks);
-        }
-
-        [HttpGet]
-		[Route("/GetAllBorrowed/History")]
-		public IActionResult GetAllBorrowedHistory()
-		{
-			List<GetBooksAndRequest> borrowedbooks = new List<GetBooksAndRequest>();
-			var get_loans = db.Loans.Where( loan => loan.TransactionStatus == "Finished").ToList();
-			if (!get_loans.Any() || get_loans.Count() == 0)
-				return NotFound("No Books Added");
-
-			foreach (var loan in get_loans)
-			{
-				if (loan.book_id is null) continue;
-				foreach (var book in loan.book_id)
-				{
-					var get_book = db.Books.Find(book);
-					if (get_book == null) continue;
-					var get_user = db.Users.Find(loan.ClientId);
-					var payload = new GetBooksAndRequest
-					{
-						book_id=get_book.BookId,
-						Title=get_book.Title,
-						Publisher=get_book.Publisher,
-						YearPublish=get_book.YearPublish,
-						BorrowDate=loan!.BorrowDate,
-						DueDate=loan!.DueDate,
-						Username=get_user!.Username,
-						Role=get_user!.Role,
-					};
-					borrowedbooks.Append(payload);
-				}
-			}
-			return Ok(borrowedbooks);
-		}
-
-		[HttpGet]
-        [Route("{bookId:int}")]
-        public IActionResult GetBook(int bookId)
-        {
-            var book = db.Books.Find(bookId);
+            var book = await _bookRepository.GetByIdAsync(bookId);
             return (book == null) ? NotFound($"#404! Id {bookId} Not Found") : Ok(book);
         }
 
         [HttpPost]
-        public IActionResult AddBook(AddBookDTO addBook)
+        public async Task<IActionResult> AddBook(AddBookDTO addBook)
         {
-            var book = new Book()
+            var book = new Book
             {
                 ISBN = addBook.ISBN,
                 Title = addBook.Title,
@@ -111,83 +41,58 @@ namespace Smart_Library.Controllers
                 Publisher = addBook.Publisher,
                 YearPublish = addBook.YearPublish,
                 Category = addBook.Category,
-                isBorrowed = false,
                 Condition = addBook.Condition,
                 CreatedBy = "Librarian",
-                CreatedAt = DateTime.UtcNow
-            };
-
-            db.Books.Add(book);
-            db.SaveChanges();
-
-            var showResult = new GetBookDTO()
-            {
-                BookId = book.BookId,
-                ISBN = book.ISBN,
-                Title = book.Title,
-                Author = book.Author,
-                Publisher = book.Publisher,
-                YearPublish = book.YearPublish,
-                Category = book.Category,
-                isBorrowed = book.isBorrowed,
-                Condition = book.Condition,
-                CreatedBy = "Librarian",
                 CreatedAt = DateTime.UtcNow,
-                UpdatedBy = "Librarian",
-                UpdatedAt = DateTime.UtcNow
+                isBorrowed = false
             };
 
-            return Ok(showResult);
-        }
-        [HttpPut]
-        [Route("BorrowBookUpdate/{bookId:int}")]
-        public IActionResult updateIsBookBorrowed(int bookId, UpdateBookBorrowed databorrowed)
-        {
-            var getBook = db.Books.Find(bookId);
-            if (getBook == null) return NotFound($"Book Not Found");
-
-            getBook.isBorrowed =databorrowed.isBorrowed;
-            db.Entry(getBook).State = EntityState.Modified;
-            db.SaveChanges();
-            return Ok(db.Books.Find(bookId));
+            await _bookRepository.AddAsync(book);
+            return Ok(book);
         }
 
-
-
-        [HttpPut]
-        [Route("{bookId:int}")]
-        public IActionResult UpdateBook(int bookId, AddBookDTO updateBook)
+        [HttpPut("{bookId:int}")]
+        public async Task<IActionResult> UpdateBook(int bookId, AddBookDTO updateBook)
         {
-            var getBook = db.Books.Find(bookId);
-            if (getBook == null) return NotFound($"#404, Id \"{bookId}\" Not Found");
+            var book = await _bookRepository.GetByIdAsync(bookId);
+            if (book == null) return NotFound($"#404! Id {bookId} Not Found");
 
-            getBook.ISBN = updateBook.ISBN;
-            getBook.Title = updateBook.Title;
-            getBook.Author = updateBook.Author;
-            getBook.Publisher = updateBook.Publisher;
-            getBook.YearPublish = updateBook.YearPublish;
-            getBook.Category = updateBook.Category;
-            getBook.Condition = updateBook.Condition;
-            getBook.UpdatedBy = "Librarian";
-            getBook.UpdatedAt = DateTime.UtcNow;
+            book.ISBN = updateBook.ISBN;
+            book.Title = updateBook.Title;
+            book.Author = updateBook.Author;
+            book.Publisher = updateBook.Publisher;
+            book.YearPublish = updateBook.YearPublish;
+            book.Category = updateBook.Category;
+            book.Condition = updateBook.Condition;
+            book.UpdatedBy = "Librarian";
+            book.UpdatedAt = DateTime.UtcNow;
 
-            db.Entry(getBook).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return Ok(db.Books.Find(bookId));
+            await _bookRepository.UpdateAsync(book);
+            return Ok(book);
         }
 
-        [HttpDelete]
-        [Route("{bookId:int}")]
-        public IActionResult DeleteBook(int bookId)
+        [HttpDelete("{bookId:int}")]
+        public async Task<IActionResult> DeleteBook(int bookId)
         {
-            var getBook = db.Books.Find(bookId);
-            if (getBook == null) return NotFound($"#404!, Id {bookId} Not Found");
+            var book = await _bookRepository.GetByIdAsync(bookId);
+            if (book == null) return NotFound($"#404! Id {bookId} Not Found");
 
-            db.Books.Remove(getBook);
-            db.SaveChanges();
-
+            await _bookRepository.DeleteAsync(book);
             return Ok($"Book With Id {bookId} Deleted Successfully.");
+        }
+
+        [HttpGet("GetAllBorrowed")]
+        public async Task<IActionResult> GetBorrowedBooks()
+        {
+            var borrowedBooks = await _bookRepository.GetBorrowedBooksAsync();
+            return (!borrowedBooks.Any()) ? NotFound("No Borrowed Books") : Ok(borrowedBooks);
+        }
+
+        [HttpGet("GetAllBorrowed/History")]
+        public async Task<IActionResult> GetBorrowedHistory()
+        {
+            var borrowedHistory = await _bookRepository.GetBorrowedHistoryAsync();
+            return (!borrowedHistory.Any()) ? NotFound("No Borrowed Books History") : Ok(borrowedHistory);
         }
     }
 }
