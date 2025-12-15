@@ -12,7 +12,7 @@
                 return facultyService.GetDayDueDateByPosition(position);
             }
             else
-            {
+            {   
                 return studentService.GetDayDueDateByPosition(position);
             }
         }

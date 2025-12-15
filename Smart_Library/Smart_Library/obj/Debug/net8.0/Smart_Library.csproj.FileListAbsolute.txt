@@ -288,10 +288,10 @@ C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Libra
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Li.E2F99844.Up2Date
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.dll
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\refint\Smart_Library.dll
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.pdb
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\Smart_Library.genruntimeconfig.cache
 C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\ref\Smart_Library.dll
-C:\Users\Lenovo\source\Smart_Library_Management_System\Smart_Library\Smart_Library\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

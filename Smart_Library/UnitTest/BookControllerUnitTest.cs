@@ -26,7 +26,6 @@ namespace Smart_Library.Tests
         [Fact]
         public async Task GetBooks_ReturnsOkResult_WhenBooksExist()
         {
-            // Arrange
             var books = new List<Book>
             {
                 new Book
@@ -60,10 +59,8 @@ namespace Smart_Library.Tests
             };
             _mockRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(books);
 
-            // Act
             var result = await _controller.GetBooks();
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnBooks = Assert.IsAssignableFrom<IEnumerable<Book>>(okResult.Value);
             Assert.Equal(2, returnBooks.Count());

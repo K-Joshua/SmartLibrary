@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Smart_Library.SmartLibraryManagement.Interface;
 
 namespace Smart_Library.SmartLibraryManagement.Service
 {
-    public class LoginService
+    public class LoginService : ILogin
     {
-        public static string GetRole(string email)
+        public string GetRole(string email)
         {
             string role;
             if (email.IndexOf("@Librarian", StringComparison.OrdinalIgnoreCase) >= 0)

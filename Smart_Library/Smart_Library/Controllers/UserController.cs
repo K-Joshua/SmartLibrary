@@ -55,8 +55,10 @@ public class UserController : ControllerBase
     [HttpPost("/Register")]
     public async Task<IActionResult> Register(AddUserDTOs addUser)
     {
+        LoginService get_role = new LoginService();
+
         var pass_hash = BCrypt.Net.BCrypt.HashPassword(addUser.Password);
-        var role = LoginService.GetRole(addUser.Email);
+        var role = get_role.GetRole(addUser.Email);
 
         var user = new User
         {
