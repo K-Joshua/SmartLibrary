@@ -4,7 +4,7 @@ using Smart_Library.SmartLibraryManagement.Interface;
 
 namespace Smart_Library.SmartLibraryManagement.Service
 {
-    public class LoginService : ILogin
+    public class LoginService : ILoginService
     {
         public string GetRole(string email)
         {
