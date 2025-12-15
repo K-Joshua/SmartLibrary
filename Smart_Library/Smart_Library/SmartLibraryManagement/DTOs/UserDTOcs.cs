@@ -13,8 +13,6 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
         public required string Password { get; set; }
 
         public required bool isActive { get; set; }
-        public DateOnly? Birthday { get; set; }
-        public required string Role { get; set; }
     }
 
     public class UpdateUserDTOs
@@ -22,7 +20,7 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
         public required string Username {get; set; }
     }
 
-    public class GetUserDTO
+    public class  GetUserDTO
     {
 		public required string Name { get; set; }
         public required int UserId { get; set; }
@@ -32,11 +30,10 @@ namespace Smart_Library.SmartLibraryManagement.DTOs
         public required string Email { get; set; }
 
         public required bool isActive { get; set; }
-        public DateOnly? Birthday { get; set; }
         public required string Role { get; set; }
     }
 
-    public class LoginDTO
+        public class LoginDTO
     {
         public required string Email { get; set; }
         public required string Password { get; set; }

@@ -32,7 +32,8 @@ namespace Smart_Library.SmartLibraryManagement.Models
         public required string Category { get; set; }
 
         [MaxLength(255)]
-        public bool? isBorrowed { get; set; } = false;
+        [Required]
+        public required bool isBorrowed { get; set; } = false;
 
         [MaxLength(255)]
         [Required]

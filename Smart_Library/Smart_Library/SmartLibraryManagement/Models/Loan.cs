@@ -16,8 +16,7 @@ namespace Smart_Library.SmartLibraryManagement.Models
         [Required]
         public required string TransactionType { get; set; }     // Borrow, Damage, Lost
 
-        [Required]
-        public required DateOnly ReservedDate { get; set; }
+        public DateOnly? ReservedDate { get; set; }
 
         [Required]
         public required DateOnly BorrowDate { get; set; }
@@ -25,16 +24,14 @@ namespace Smart_Library.SmartLibraryManagement.Models
         [Required]
         public required DateOnly DueDate { get; set; }
 
-        [Required]
-        public required DateOnly ReturnDate { get; set; }
+        public DateOnly? ReturnDate { get; set; }
 
-        public List<int> book_id { get; set; } = [];
+        public List<int>? book_id { get; set; } = [];
 
         [Required]
         public required string TransactionStatus { get; set; }
 
-        [Required]
-        public required int FineId { get; set; }
+        public int? FineId { get; set; }
 
         [Required]
         public required string CreatedBy { get; set; }

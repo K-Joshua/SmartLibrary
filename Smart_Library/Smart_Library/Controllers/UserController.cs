@@ -1,110 +1,120 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Smart_Library.SmartLibraryManagement;
-using Smart_Library.SmartLibraryManagement.Models;
 using Smart_Library.SmartLibraryManagement.DTOs;
-using Microsoft.EntityFrameworkCore;
+using Smart_Library.SmartLibraryManagement.Interface;
+using Smart_Library.SmartLibraryManagement.Models;
 using Smart_Library.SmartLibraryManagement.Service;
 
-namespace Smart_Library.Controllers
+[Route("SmartLibrary/[controller]")]
+[ApiController]
+public class UserController : ControllerBase
 {
-    [Route("api/[controller]")] 
-    [ApiController]
-    public class UserController : Controller
+    private readonly IUserRepository _userRepository;
+
+    public UserController(IUserRepository userRepository)
     {
-        private readonly DatabaseLibrary db;
-        public UserController(DatabaseLibrary db) 
+        _userRepository = userRepository;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetUsers()
+    {
+        var users = await _userRepository.GetAllAsync();
+        if (!users.Any()) return NotFound("No User Registered");
+
+        var payloadList = users.Select(u => new GetUserDTO
         {
-            this.db = db;  
-        }
+            Name = u.Name,
+            UserId = u.UserId,
+            Username = u.Username,
+            Email = u.Email,
+            isActive = u.isActive,
+            Role = u.Role
+        }).ToList();
 
-        [HttpGet]
-        public IActionResult GetUsers()
+        return Ok(payloadList);
+    }
+        
+    [HttpGet("{userId:int}")]
+    public async Task<IActionResult> GetUser(int userId)
+    {
+        var user = await _userRepository.GetByIdAsync(userId);
+        if (user == null) return NotFound($"#404! Id {userId} Not Found");
+
+        var payload = new GetUserDTO
         {
-            var users = db.Users.ToList();
-            return (!users.Any() || users.Count() == 0) ? NotFound("No User Registered"): Ok(users);
-        }
+            Name = user.Name,
+            UserId = user.UserId,
+            Username = user.Username,
+            Email = user.Email,
+            isActive = user.isActive,
+            Role = user.Role
+        };
+        return Ok(payload);
+    }
 
-		[HttpGet]
-		[Route("/GetUserName")]
-		public IActionResult GetName(int id)
-		{
-			var user = db.Users.Find(id);
-			return (user is null) ? NotFound("No Students Registered") : Ok(user.Name);
-        }
+    [HttpPost("/Register")]
+    public async Task<IActionResult> Register(AddUserDTOs addUser)
+    {
+        LoginService get_role = new LoginService();
 
+        var pass_hash = BCrypt.Net.BCrypt.HashPassword(addUser.Password);
+        var role = get_role.GetRole(addUser.Email);
 
-		[HttpGet]
-        [Route("{userId:int}")]
-        public IActionResult GetUser(int userId)
+        var user = new User
         {
-            var user = db.Users.Find(userId);
-            return (user == null) ? NotFound($"#404! ,Id {userId} Not Found") : Ok(user);
-        }
+            Name = addUser.Name,
+            Username = addUser.Username,
+            Email = addUser.Email,
+            PasswordHash = pass_hash,
+            isActive = true,
+            Role = role
+        };
 
-		[HttpPost]
-        [Route("/Register")]
-        public IActionResult Register(AddUserDTOs addUser)
-        {
-            string pass_hash = BCrypt.Net.BCrypt.HashPassword(addUser.Password);
-            string role = LoginService.GetRole(addUser.Email);
-            var user = new User()
-            {
-                Name = addUser.Name,
-				Username = addUser.Username,
-                Email = addUser.Email,
-                PasswordHash = pass_hash,
-                isActive = true,
-                Birthday = addUser.Birthday,
-                Role = role,
-            };
-            db.Users.Add(user);
-            db.SaveChanges();
-            var showresult = new GetUserDTO()
-            {
-                Name = addUser.Name,
-                UserId = user.UserId,
-				Username = addUser.Username,
-                Email = addUser.Email,
-                isActive = addUser.isActive,
-                Birthday = addUser.Birthday,
-                Role = role,
-            };
-            return Ok(showresult);
-        }
+        await _userRepository.AddAsync(user);
 
-        [HttpPost]
-        [Route("/LogIn")]
-        public IActionResult Login(LoginDTO logindto)
+        var payload = new GetUserDTO
         {
-            var get_user = db.Users.Where(e => e.Email  == logindto.Email).FirstOrDefault();
-            if (get_user == null) return Unauthorized("Invalid Credentials! Username Incorrect");
-            if (BCrypt.Net.BCrypt.Verify(logindto.Password, get_user.PasswordHash) == false) return Unauthorized("Invalid Credentials! Password Incorrect");
-            return Ok($"Login Successful, Welcome Back {get_user.Username}");
-        }
+            Name = user.Name,
+            UserId = user.UserId,
+            Username = user.Username,
+            Email = user.Email,
+            isActive = user.isActive,
+            Role = role
+        };
 
-        [HttpPut]
-        [Route("{userId:int}")]
-        public IActionResult UpdateUser(int userId, AddUserDTOs updateUser)
-        {
-            var get_user = db.Users.Find(userId);
-            if (get_user == null) return NotFound($"#404, Id \"{userId}\" Not Found");
-            get_user.Username = updateUser.Username;
-            get_user.Birthday = updateUser.Birthday;
-            db.Entry(get_user).State = EntityState.Modified;
-            db.SaveChanges();
-            var show_result = db.Users.Find(userId);
-            return Ok(show_result);
-        }
+        return Ok(payload);
+    }
 
-        [HttpDelete]
-        [Route("{userId:int}")]
-        public IActionResult DeleteStudyLoad(int userId)
-        {
-            var get_user = db.Users.Find(userId);
-            if (get_user == null) return NotFound($"#404!, Id {userId} Not Found");
-            db.Users.Remove(get_user);
-            db.SaveChanges();
-            return Ok($"User With Id {userId} Deleted Successfully.");
-        }
+    [HttpPost("/LogIn")]
+    public async Task<IActionResult> Login(LoginDTO logindto)
+    {
+        var user = await _userRepository.GetByEmailOrUsernameAsync(logindto.Email);
+        if (user == null) return Unauthorized("Invalid Credentials! Email Incorrect");
+        if (!BCrypt.Net.BCrypt.Verify(logindto.Password, user.PasswordHash))
+            return Unauthorized("Invalid Credentials! Password Incorrect");
+
+        return Ok(new { Message = $"Login Successful, Welcome Back {user.Username}" });
+    }
+
+    [HttpPut("{userId:int}")]
+    public async Task<IActionResult> UpdateUser(int userId, UpdateUserDTOs updateUser)
+    {
+        var user = await _userRepository.GetByIdAsync(userId);
+        if (user == null) return NotFound($"#404, Id \"{userId}\" Not Found");
+
+        user.Username = updateUser.Username;
+        await _userRepository.UpdateAsync(user);
+            
+        return Ok(user);
+    }
+
+    [HttpDelete("{userId:int}")]
+    public async Task<IActionResult> DeleteUser(int userId)
+    {
+        var user = await _userRepository.GetByIdAsync(userId);
+        if (user == null) return NotFound($"#404!, Id {userId} Not Found");
+
+        await _userRepository.DeleteAsync(user);
+        return Ok($"User With Id {userId} Deleted Successfully.");
     }
 }

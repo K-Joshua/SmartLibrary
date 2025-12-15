@@ -10,7 +10,7 @@
   },
   "profiles": {
     "http": {
-      "commandname": "Project",
+      "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -20,7 +20,7 @@
       }
     },
     "https": {
-      "commandname": "Project",
+      "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -30,7 +30,7 @@
       }
     },
     "IIS Express": {
-      "commandname": "IISExpress",
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {

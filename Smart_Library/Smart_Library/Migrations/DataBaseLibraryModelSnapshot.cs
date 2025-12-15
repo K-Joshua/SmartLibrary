@@ -103,9 +103,6 @@ namespace Smart_Library.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("GradeLevel")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Position")
                         .IsRequired()
                         .HasColumnType("text");
@@ -190,13 +187,13 @@ namespace Smart_Library.Migrations
                     b.Property<DateOnly>("DueDate")
                         .HasColumnType("date");
 
-                    b.Property<int>("FineId")
+                    b.Property<int?>("FineId")
                         .HasColumnType("integer");
 
-                    b.Property<DateOnly>("ReservedDate")
+                    b.Property<DateOnly?>("ReservedDate")
                         .HasColumnType("date");
 
-                    b.Property<DateOnly>("ReturnDate")
+                    b.Property<DateOnly?>("ReturnDate")
                         .HasColumnType("date");
 
                     b.Property<string>("TransactionStatus")
@@ -217,7 +214,6 @@ namespace Smart_Library.Migrations
                         .HasColumnType("text");
 
                     b.PrimitiveCollection<List<int>>("book_id")
-                        .IsRequired()
                         .HasColumnType("integer[]");
 
                     b.HasKey("LoanId");
@@ -256,15 +252,12 @@ namespace Smart_Library.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
-                    b.Property<DateOnly?>("Birthday")
-                        .HasColumnType("date");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
@@ -277,13 +270,15 @@ namespace Smart_Library.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
                     b.Property<bool>("isActive")
                         .HasColumnType("boolean");
 
                     b.HasKey("UserId");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.ToTable("Users");
                 });

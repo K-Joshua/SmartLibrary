@@ -1,11 +1,16 @@
 ﻿namespace Smart_Library.SmartLibraryManagement.Service
 {
-    public class StudentService : BorrowServiceBase
+    public class StudentService : FineService
     {
-        public override float GetTotalFine(int numberOfData, string position)
+        public override decimal GetTotalFine(int numberOfData, string position)
         {
-            float totalCost = (float)numberOfData * 2;
+            decimal totalCost = (decimal)numberOfData * 2;
             return totalCost;
+        }
+
+        public override int GetDayDueDateByPosition(string position)
+        {
+            return 3; // student 3 by default 
         }
     }
 }

@@ -16,8 +16,6 @@ namespace Smart_Library.SmartLibraryManagement.Models
         [Required]
         public required string Department { get; set; }
 
-        [Required]
-        public required int GradeLevel { get; set; }
 
         [Required]
         public required string Position { get; set; }
