@@ -1,1 +1,5 @@
 .vs
+.obb
+*.cache
+*.log
+Smart_Library/Smart_Library/obj/

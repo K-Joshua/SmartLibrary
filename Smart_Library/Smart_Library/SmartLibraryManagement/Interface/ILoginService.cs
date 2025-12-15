@@ -1,6 +1,6 @@
 ﻿namespace Smart_Library.SmartLibraryManagement.Interface
 {
-    public interface ILogin
+    public interface ILoginService
     {
         string GetRole(string email);
     }

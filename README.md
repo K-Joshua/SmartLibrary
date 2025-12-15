@@ -6,11 +6,10 @@ The **Smart Library Management System** is a C# application designed to help lib
 
 The system allows:
 
-- Managing books and catalogues  
+- Managing books  
 - Registering users (students and faculty)  
 - Borrowing and returning books  
 - Calculating fines for overdue books  
-- Handling reservations  
 - Generating basic reports  
 
 ---
@@ -19,8 +18,8 @@ The system allows:
 
 - **Programming Language:** C#  
 - **Backend Framework:** ASP.NET Core (Web API) or C# Desktop App (WPF/WinForms)  
-- **Database:** MySQL or PostgreSQL (via Entity Framework Core)  
-- **Testing:** xUnit or NUnit  
+- **Database:** PostgreSQL (via Entity Framework Core)  
+- **Testing:** XUnit  
 - **Version Control:** GitHub or GitLab  
 
 ---
@@ -34,34 +33,32 @@ The system allows:
 - `Faculty` – Derived from `User` with extended borrowing privileges.  
 - `Loan` – Tracks borrowed books and due dates.  
 - `Fine` – Calculates penalties for overdue books.  
-- `Reservation` – Manages book reservations.  
-- `Catalog` – Organizes and manages book collections.  
+ 
 
-### Inheritance
-- Base class: `User`  
+### Inheritance - *Service*
+- Base class: `Fine`  
 - Derived classes: `Student`, `Faculty`  
 - Different borrowing rules implemented per user type  
 
 ### Polymorphism
-- Methods like `BorrowBook()` are **overridden** for different user types  
+- Methods like `FineService()` are **overridden** for different user types (eg. Student and Faculty)  
 - Supports **method overloading** where applicable  
 
 ### Encapsulation
 - Private fields with **public properties** and validation logic  
 
 ### Abstraction & Interfaces
-- Interfaces like `IBookRepository` and `ILoanService` provide abstraction and modularity  
+- Interfaces like `IBookRepository` and `ILoginService` provide abstraction and modularity  
 
 ### Design Patterns
 - **Repository Pattern** – Separates data access from business logic  
-- **Factory** – Used for modularity and scalability  
 
 ### SOLID Principles
-- **Single Responsibility:** Each class has one responsibility  
-- **Open/Closed:** Classes are open for extension but closed for modification  
-- **Liskov Substitution:** Derived classes can replace base classes safely  
+- **Single Responsibility:** Each class has one responsibility, this holds true for all classes  
+- **Open/Closed:** Classes are open for extension but closed for modification, can be shown in each service  
+- **Liskov Substitution:** Derived classes can replace base classes safely, no forced modification  
 - **Interface Segregation:** Interfaces are specific and focused  
-- **Dependency Inversion:** High-level modules depend on abstractions  
+- **Dependency Inversion:** High-level and Low-Level modules depend on abstractions  
 
 ---
 
@@ -70,6 +67,5 @@ The system allows:
 1. **Book Management:** Add, update, remove, and search books  
 2. **User Management:** Register students and faculty, maintain profiles  
 3. **Loan Management:** Borrow/return books, track due dates  
-4. **Fines:** Automatic calculation of overdue fines  
+4. **Fines:** Generate reports on borrowed books, overdue fines, and user activity - *This Translates as Borrow Where It Holds Reports*  
 5. **Reservations:** Reserve unavailable books  
-6. **Reports:** Generate reports on borrowed books, overdue fines, and user activity  

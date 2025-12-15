@@ -1,6 +1,6 @@
 ﻿namespace Smart_Library.SmartLibraryManagement.Service
 {
-    public abstract class FineService
+    public class FineService
     {
         public virtual Dictionary<string, decimal> finecost { get; } = new Dictionary<string, decimal>()
         {
